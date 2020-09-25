@@ -1,0 +1,10 @@
+/Users/kate/Desktop/c_practice/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/src/CMakeFiles/prac_static.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/src/CMakeFiles/prac.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/src/CMakeFiles/c_prac.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/Users/kate/Desktop/c_practice/cmake-build-debug/test/CMakeFiles/test-prac.dir

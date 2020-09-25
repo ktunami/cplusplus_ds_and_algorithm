@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/data_structure/linear_structure/LinkedList.h
+
+/Users/kate/Desktop/c_practice/src/data_structure/linear_structure/LinkedList.c
+data_structure/linear_structure/LinkedList.h
+/Users/kate/Desktop/c_practice/src/data_structure/linear_structure/data_structure/linear_structure/LinkedList.h
+

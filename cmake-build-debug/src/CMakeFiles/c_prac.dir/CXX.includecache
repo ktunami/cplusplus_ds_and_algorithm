@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/data_structure/linear_structure/LinkedList.h
+
+/Users/kate/Desktop/c_practice/src/data_structure/linear_structure/LinkedList.cpp
+data_structure/linear_structure/LinkedList.h
+/Users/kate/Desktop/c_practice/src/data_structure/linear_structure/data_structure/linear_structure/LinkedList.h
+stdlib.h
+-
+iostream
+-
+
+/Users/kate/Desktop/c_practice/src/main.cpp
+iostream
+-
+data_structure/linear_structure/LinkedList.h
+/Users/kate/Desktop/c_practice/src/data_structure/linear_structure/LinkedList.h
+unordered_set
+-
+
