@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/c_prac.dir/main.cpp.o CMakeFiles/c_prac.dir/data_structure/linear_structure/LinkedList_int.cpp.o  -o ../bin/c_prac 

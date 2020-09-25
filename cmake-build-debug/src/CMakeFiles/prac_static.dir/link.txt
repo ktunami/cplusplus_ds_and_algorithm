@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc ../lib/liblibprac.a  CMakeFiles/prac_static.dir/main.cpp.o CMakeFiles/prac_static.dir/data_structure/linear_structure/LinkedList_int.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib ../lib/liblibprac.a
