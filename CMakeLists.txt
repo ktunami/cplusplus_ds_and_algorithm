@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(c_practice)
-
+add_definitions("-Wall -g")
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(
@@ -11,5 +11,3 @@ include_directories(
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 add_subdirectory(${PROJECT_SOURCE_DIR}/test)
-
-
