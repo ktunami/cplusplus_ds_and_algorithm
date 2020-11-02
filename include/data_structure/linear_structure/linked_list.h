@@ -1,13 +1,12 @@
-/*********************************************************************************
-  *FileName:  LinkedList.h
-  *Author:    Kate
-  *Version:   1.0
-  *Date:      2020/9/25
-  *
-**********************************************************************************/
+/***************************************************
+* File:   linked_list.h
+* Brief:  About linked list
+* Author: kate
+* Update: 2020/11/2.
+***************************************************/
 
-#ifndef C_PRACTICE_LINKEDLIST_H
-#define C_PRACTICE_LINKEDLIST_H
+#ifndef C_PRACTICE_LINKED_LIST_H
+#define C_PRACTICE_LINKED_LIST_H
 
 class LinkedList {
 public:
@@ -27,8 +26,8 @@ public:
   ///@brief Print the whole array
   void PrintList();
 
-  ///@brief Leecode25
-  void Leecode25(int k);
+  ///@brief Reverse linked list for every k nodes, dont reverse if less than k nodes (leetcode25)
+  void ReverseKGroup(int k);
 
 private:
   ///@brief Head node of the linked list
@@ -38,4 +37,4 @@ private:
 };
 
 
-#endif//C_PRACTICE_LINKEDLIST_H
+#endif//C_PRACTICE_LINKED_LIST_H

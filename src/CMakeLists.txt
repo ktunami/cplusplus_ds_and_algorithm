@@ -22,7 +22,7 @@ add_executable(c_prac
         ${SRC_DP_DC}
         ${SRC_GREEDY}
         ${SRC_SORT_SEARCH}
-        ${SRC_STRING})
+        ${SRC_STRING} data_structure/linear_structure/statck_problem.cpp ../include/data_structure/tree/binary_tree.h data_structure/tree/binary_tree.cpp)
 
 add_library(prac SHARED
         ${SRC}

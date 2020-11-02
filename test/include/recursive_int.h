@@ -1,19 +1,17 @@
 /***************************************************
-* File:   recursive.h
-* Brief:  Solutions by applying recursive method
+* File:   recursive_int.h
+* Brief:  For gtest
 * Author: kate
-* Update: 2020/10/25.
+* Update: 2020/11/2.
 ***************************************************/
 
-
-#ifndef C_PRACTICE_RECURSIVE_H
-#define C_PRACTICE_RECURSIVE_H
+#ifndef C_PRACTICE_RECURSIVE_H_INT
+#define C_PRACTICE_RECURSIVE_H_INT
 #include <stack>
 
 class Recursive{
 public:
   void ReverseStack(std::stack<int> &st);
-private:
   int get_bottom_num(std::stack<int> &st);
 };
-#endif//C_PRACTICE_RECURSIVE_H
+#endif//C_PRACTICE_RECURSIVE_H_INT

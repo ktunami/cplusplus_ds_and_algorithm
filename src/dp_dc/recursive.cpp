@@ -1,6 +1,9 @@
-//
-// Created by kate on 2020/10/21.
-//
+/***************************************************
+* File:   recursive.cpp
+* Brief:  Solutions by applying recursive method
+* Author: kate
+* Update: 2020/10/25.
+***************************************************/
 
 #include "dp_dc/recursive.h"
 

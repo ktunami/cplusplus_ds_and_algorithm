@@ -1,13 +1,11 @@
-/*********************************************************************************
-  *FileName:  LinkedList.cpp
-  *Author:    Kate
-  *Version:   1.0
-  *Date:      2020/9/25
-  *
-**********************************************************************************/
+/***************************************************
+* File:   linked_list.cpp
+* Brief:  About linked list
+* Author: kate
+* Update: 2020/11/2.
+***************************************************/
 
-#include "data_structure/linear_structure/LinkedList.h"
-#include <stdlib.h>
+#include "data_structure/linear_structure/linked_list.h"
 #include <iostream>
 
 LinkedList::LinkedList() {
@@ -45,7 +43,7 @@ void LinkedList::PrintList() {
   }
 }
 
-void LinkedList::Leecode25(int k) {
+void LinkedList::ReverseKGroup(int k) {
   Node * j = head->next;
   Node * i = head->next;
   Node * last_tail = head;

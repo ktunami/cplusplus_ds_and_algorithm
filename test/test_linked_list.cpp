@@ -1,12 +1,11 @@
-/*********************************************************************************
-  *FileName:  test_LinkedList.cpp
-  *Author:    Kate
-  *Version:   1.0
-  *Date:      2020/9/25
-  *
-**********************************************************************************/
+/***************************************************
+* File:   test_linked_list.cpp
+* Brief:  For gtest
+* Author: kate
+* Update: 2020/11/2.
+***************************************************/
 
-#include "LinkedList_int.h"
+#include "linked_list_int.h"
 #include <gtest/gtest.h>
 #include <memory>
 
@@ -31,7 +30,7 @@ TEST(TestLinkList, Leecode25) {
   int n = 14;
   int arr1[]{3,2,1,6,5,4,9,8,7,12,11,10,13,14}; //k = 3
   lst_ptr_k3->CreateByArrayTailInsert(arr, n);
-  lst_ptr_k3->Leecode25(3);
+  lst_ptr_k3->ReverseKGroup(3);
   auto cur1{lst_ptr_k3->head->next};
   for (int i{0}; i<n; ++i) {
     ASSERT_FALSE(nullptr == cur1);

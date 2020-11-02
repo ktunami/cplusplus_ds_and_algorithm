@@ -1,8 +1,11 @@
-//
-// Created by kate on 2020/10/21.
-//
-#include "recursive-int.h"
+/***************************************************
+* File:   test_recursive.cpp
+* Brief:  For gtest
+* Author: kate
+* Update: 2020/11/2.
+***************************************************/
 
+#include "recursive_int.h"
 #include <gtest/gtest.h>
 #include <ctime>
 
