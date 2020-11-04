@@ -8,70 +8,44 @@
 #include "data_structure/linear_structure/linked_list.h"
 #include <iostream>
 
-LinkedList::LinkedList() {
-  head = nullptr;
-  tail_ptr = nullptr;
-}
-
-LinkedList::~LinkedList(){
-  while (head) {
-    Node * cur = head;
-    free(cur);
-    head = head->next;
+void LinkedList::DeleteLinkedList(ListNode * root) {
+  ListNode * cur{nullptr};
+  while (root != nullptr) {
+    cur = root;
+    root = root->next;
+    delete cur;
   }
 }
 
-void LinkedList::CreateByArrayTailInsert(int arr[], int len) {
-  Node * cur = (Node *)malloc(sizeof(Node));
-  cur->next = nullptr;
-  head = cur;
-  tail_ptr = head;
-  for (int i = 0; i < len; ++i) {
-    Node * cur = (Node *)malloc(sizeof(Node));
-    cur->data = arr[i];
-    cur->next = nullptr;
-    tail_ptr->next = cur;
-    tail_ptr = tail_ptr->next;
+ListNode * LinkedList::CreatByTailInsert(std::vector<int> const& vec, bool with_head, int head_val) {
+  ListNode * root{nullptr}, * it{nullptr};
+  auto len{vec.size()};
+  if (with_head) {
+    root = new ListNode(head_val);
+    it = root;
   }
-}
-
-void LinkedList::PrintList() {
-  Node * p = head->next;
-  while (p) {
-    std::cout << p->data << std::endl;
-    p = p->next;
-  }
-}
-
-void LinkedList::ReverseKGroup(int k) {
-  Node * j = head->next;
-  Node * i = head->next;
-  Node * last_tail = head;
-  while (j) {
-    int count = k;
-    while (j && count > 0) {
-      j = j->next;
-      --count;
+  for (int i{0}; i < len; ++i) {
+    ListNode * cur = new ListNode(vec.at(i));
+    if (i == 0 && !with_head) {
+      root = cur;
+      it = cur;
+      continue;
     }
-    if (count > 0) {
-      break;
-    } else {
-      Node * h = nullptr;
-      int num = k;
-      Node * current_front = last_tail;
-      while (i!=j) {
-        Node * c = i;
-        i = i->next;
-        if (h == nullptr) {
-          c->next = j;
-          last_tail = c;
-        } else {
-          c->next = h;
-        }
-        h = c;
-        --num;
-      }
-      current_front->next = h;
-    }
+    it->next = cur;
+    it = cur;
   }
+  return root;
+}
+
+std::vector<int> LinkedList::LinkedListTraversal(ListNode * const root, bool with_head) {
+  ListNode * cur = root;
+  std::vector<int> result;
+  if (with_head) {
+    cur = cur->next;
+  }
+  while (cur != nullptr) {
+    result.push_back(cur->val);
+    cur = cur->next;
+  }
+  return result;
 }

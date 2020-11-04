@@ -7,6 +7,7 @@
 
 #include "data_structure/linear_structure/queue_problem.h"
 #include <deque>
+#include <iostream>
 
 std::vector<int> QueueProblem::maxSlidingWindow(std::vector<int>& nums, int k) {
   std::vector<int> result;

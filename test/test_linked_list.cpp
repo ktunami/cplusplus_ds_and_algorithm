@@ -9,32 +9,18 @@
 #include <gtest/gtest.h>
 #include <memory>
 
-TEST(TestLinkList, CreateByArrayTailInsert) {
-  std::shared_ptr<LinkedList> lst_ptr{std::make_shared<LinkedList>()};
-  int n = 9;
-  int arr[9]{1,4,6,9,3,8,7,2,10};
-  lst_ptr->CreateByArrayTailInsert(arr, n);
-  auto cur{lst_ptr->head};
-  ASSERT_FALSE(nullptr == cur->next);
-  cur = cur->next;
-  for (int i{0}; i<n; ++i) {
-    ASSERT_FALSE(nullptr == cur);
-    ASSERT_EQ(arr[i],cur->data);
-    cur = cur->next;
+TEST(TestLinkList, CreatByTailInsert) {
+  std::vector<int> input_vec{1,2,3,4,5};
+  auto len{input_vec.size()};
+  LinkedList ls;
+  ListNode * with_head{ls.CreatByTailInsert(input_vec, true)};
+  ListNode * without_head{ls.CreatByTailInsert(input_vec, false)};
+  std::vector<int> with_head_vec{ls.LinkedListTraversal(with_head,true)};
+  std::vector<int> without_head_vec{ls.LinkedListTraversal(without_head, false)};
+  for (int i{0}; i < len; ++i) {
+    ASSERT_EQ(input_vec.at(i), with_head_vec.at(i));
+    ASSERT_EQ(input_vec.at(i), without_head_vec.at(i));
   }
+
 }
 
-TEST(TestLinkList, Leecode25) {
-  std::shared_ptr<LinkedList> lst_ptr_k3{std::make_shared<LinkedList>()};
-  int arr[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14};
-  int n = 14;
-  int arr1[]{3,2,1,6,5,4,9,8,7,12,11,10,13,14}; //k = 3
-  lst_ptr_k3->CreateByArrayTailInsert(arr, n);
-  lst_ptr_k3->ReverseKGroup(3);
-  auto cur1{lst_ptr_k3->head->next};
-  for (int i{0}; i<n; ++i) {
-    ASSERT_FALSE(nullptr == cur1);
-    ASSERT_EQ(arr1[i],cur1->data);
-    cur1 = cur1->next;
-  }
-}
