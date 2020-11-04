@@ -9,7 +9,7 @@
 #include <gtest/gtest.h>
 #include <memory>
 
-TEST(TestLinkList, CreatByTailInsert) {
+TEST(TestLinkedList, CreatByTailInsert) {
   std::vector<int> input_vec{1,2,3,4,5};
   auto len{input_vec.size()};
   LinkedList ls;
@@ -21,6 +21,30 @@ TEST(TestLinkList, CreatByTailInsert) {
     ASSERT_EQ(input_vec.at(i), with_head_vec.at(i));
     ASSERT_EQ(input_vec.at(i), without_head_vec.at(i));
   }
+}
 
+TEST(TestLinkedList, ReverseList) {
+  LinkedList ls;
+  std::vector<int> input_vec{1,2,3,4,5};
+  auto len{input_vec.size()};
+  auto origin{ls.CreatByTailInsert(input_vec, false)};
+  auto reversed{ls.ReverseList(origin)};
+  std::vector<int> reversed_vec{ls.LinkedListTraversal(reversed,false)};
+  for (int i{0}; i < len; ++i) {
+    ASSERT_EQ(input_vec.at(i), reversed_vec.at(len-1-i));
+  }
+}
+
+
+TEST(TestLinkedList, ReverseList2) {
+  LinkedList ls;
+  std::vector<int> input_vec{1,2,3,4,5};
+  auto len{input_vec.size()};
+  auto origin{ls.CreatByTailInsert(input_vec, false)};
+  auto reversed{ls.ReverseList2(origin)};
+  std::vector<int> reversed_vec{ls.LinkedListTraversal(reversed,false)};
+  for (int i{0}; i < len; ++i) {
+    ASSERT_EQ(input_vec.at(i), reversed_vec.at(len-1-i));
+  }
 }
 

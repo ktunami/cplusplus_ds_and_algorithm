@@ -49,3 +49,32 @@ std::vector<int> LinkedList::LinkedListTraversal(ListNode * const root, bool wit
   }
   return result;
 }
+
+
+ListNode* LinkedList::ReverseList(ListNode * pHead) {
+  ListNode * new_head{new ListNode(404)};
+  ListNode * cur = pHead;
+  while(nullptr != cur) {
+    auto id{cur};
+    cur = cur->next;
+    id->next = new_head->next;
+    new_head->next = id;
+  }
+  cur = new_head;
+  new_head = new_head->next;
+  delete cur;
+  return new_head;
+}
+
+ListNode * LinkedList::ReverseList2(ListNode* pHead) {
+  ListNode * pre{nullptr};
+  ListNode * cur{pHead};
+  ListNode * next{nullptr};
+  while (nullptr != cur) {
+    next = cur->next;
+    cur->next = pre;
+    pre = cur;
+    cur = next;
+  }
+  return pre;
+}

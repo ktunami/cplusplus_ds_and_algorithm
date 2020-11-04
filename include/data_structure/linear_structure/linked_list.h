@@ -34,6 +34,17 @@ public:
   ///@param head_val : Value of head node
   ///@return Root of created linked list
   ListNode * CreatByTailInsert(std::vector<int> const& vec, bool with_head, int head_val = 404);
+
+  ///@brief Reverse linked list (Nowcoder 78) Method2
+  ///@param Original linked list
+  ///@return Reversed linked list
+  ListNode* ReverseList(ListNode* pHead) ;
+
+  ///@brief Reverse linked list (Nowcoder 78) Method2
+  ///@param Original linked list
+  ///@return Reversed linked list
+  ListNode* ReverseList2(ListNode* pHead) ;
+
 };
 
 
