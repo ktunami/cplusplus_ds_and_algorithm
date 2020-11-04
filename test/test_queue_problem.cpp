@@ -20,3 +20,11 @@ TEST(QueueProblem, maxSlidingWindow) {
     ASSERT_EQ(result.at(i), expected_result.at(i));
   }
 }
+
+TEST(QueueProblem, getNum) {
+  std::vector<int> input_array{8,7,12,5,16,9,17,2,4,6};
+  int num{4}, expected_result{14};
+  QueueProblem qu;
+  auto result{qu.getNum(input_array, num)};
+  ASSERT_EQ(expected_result,result);
+}

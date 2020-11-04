@@ -7,7 +7,6 @@
 
 #include "data_structure/linear_structure/queue_problem.h"
 #include <deque>
-#include <iostream>
 
 std::vector<int> QueueProblem::maxSlidingWindow(std::vector<int>& nums, int k) {
   std::vector<int> result;
@@ -31,6 +30,38 @@ std::vector<int> QueueProblem::maxSlidingWindow(std::vector<int>& nums, int k) {
         std::cout << "You are not supposed to meet here" << std::endl;
       }
     }
+  }
+  return result;
+}
+
+int QueueProblem::getNum(std::vector<int> &vec, int num) {
+  int result{0};
+  auto len{vec.size()};
+  std::deque<int> largest_ele, smallest_ele;
+  int l{0}, r{0};
+  while (l < len) {
+    while (r < len) {
+      while(!largest_ele.empty() && vec.at(r) >= vec.at(largest_ele.back())) {
+        largest_ele.pop_back();
+      }
+      largest_ele.push_back(r);
+      while(!smallest_ele.empty() && vec.at(r) <= vec.at(smallest_ele.back())) {
+        smallest_ele.pop_back();
+      }
+      smallest_ele.push_back(r);
+      if ((vec.at(largest_ele.front()) - vec.at(smallest_ele.front())) > num) {
+        break;
+      }
+      ++r;
+    }
+    if (largest_ele.front() == l) {
+      largest_ele.pop_front();
+    }
+    if (smallest_ele.front() == l) {
+      smallest_ele.pop_front();
+    }
+    result += r-l;
+    ++l;
   }
   return result;
 }

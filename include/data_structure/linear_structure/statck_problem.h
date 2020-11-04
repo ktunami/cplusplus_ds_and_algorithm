@@ -18,7 +18,6 @@ public:
   /// @return Root of MaxTree
   BTNode* constructMaximumBinaryTree(std::vector<int>& nums);
 
-
   /// @brief Daily Temperature (leetcode 739)
   /// @param T : Input temperatures
   /// @return Vector of days for a rise
