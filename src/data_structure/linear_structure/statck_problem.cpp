@@ -43,3 +43,62 @@ BTNode* StackProblem::constructMaximumBinaryTree(std::vector<int>& nums) {
   }
   return RT;
 }
+
+std::vector<int> StackProblem::dailyTemperatures(std::vector<int>& T) {
+  std::vector<int> result(T.size(),0);
+  std::stack<int> st;
+  for (int i{0}; i < T.size(); ++i) {
+    while (!st.empty() && T.at(st.top()) < T.at(i)) {
+      result[st.top()] = i - st.top();
+      st.pop();
+    }
+    st.push(i);
+  }
+  return result;
+}
+
+int StackProblem::largestRectangleArea(std::vector<int>& heights) {
+  auto len{heights.size()};
+  std::vector<int> right_idx(len,heights.size());
+  std::vector<int> left_idx(len,-1);
+  std::stack<int> st_r, st_l;
+  for (int i{0}; i < len; ++i) {
+    while (!st_r.empty() && heights.at(st_r.top()) > heights.at(i)) {
+      right_idx[st_r.top()] = i;
+      st_r.pop();
+    }
+    st_r.push(i);
+    while (!st_l.empty() && heights.at(st_l.top()) > heights.at(len-i-1)) {
+      left_idx[st_l.top()] = len-i-1;
+      st_l.pop();
+    }
+    st_l.push(len-i-1);
+  }
+  int max_num = 0;
+  for (int i{0}; i < len; ++i) {
+    int cur_area = (right_idx.at(i) - left_idx.at(i) - 1) * heights.at(i);
+    max_num = cur_area > max_num ? cur_area : max_num;
+  }
+  return max_num;
+}
+
+int StackProblem::maximalRectangle(std::vector<std::vector<char>>& matrix) {
+  int result{0};
+  auto len{matrix.size()};
+  if (len != 0) {
+    auto width{matrix.at(0).size()};
+    std::vector<int> heights(width,0);
+    for (int i{0}; i < len; ++i) {
+      for (int j{0}; j < width; ++j) {
+        if (matrix.at(i).at(j) == '1') {
+          heights.at(j) += 1;
+        } else {
+          heights.at(j) = 0;
+        }
+      }
+      auto cur_max{largestRectangleArea(heights)};
+      result = cur_max > result ? cur_max : result;
+    }
+  }
+  return result;
+}

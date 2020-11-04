@@ -19,3 +19,33 @@ TEST(StackProblem, constructMaximumBinaryTree) {
     ASSERT_EQ(vec.at(i), result_vec.at(i));
   }
 }
+
+TEST(StackProblem, dailyTemperatures) {
+  StackProblem sl;
+  std::vector<int> vec{73,74,75,71,69,72,76,73};
+  std::vector<int> expected_result{1,1,4,2,1,1,0,0};
+  auto result{sl.dailyTemperatures(vec)};
+  ASSERT_EQ(result.size(), expected_result.size());
+  for (int i{0}; i < vec.size(); ++i) {
+    ASSERT_EQ(result.at(i), expected_result.at(i));
+  }
+}
+
+TEST(StackProblem, largestRectangleArea) {
+  StackProblem sl;
+  std::vector<int> vec{2,1,5,6,2,3};
+  int expected_result{10};
+  ASSERT_EQ(expected_result, sl.largestRectangleArea(vec));
+}
+
+TEST(StackProblem, maximalRectangle) {
+  StackProblem sl;
+  std::vector<std::vector<char>> input {
+    {'1','0','1','0','0'},
+    {'1','0','1','1','1'},
+    {'1','1','1','1','1'},
+    {'1','0','0','1','0'}
+  };
+  int expected_result{6};
+  ASSERT_EQ(expected_result, sl.maximalRectangle(input));
+}
