@@ -6,6 +6,7 @@
 ***************************************************/
 
 #include "data_structure/linear_structure/linked_list.h"
+#include <stack>
 #include <iostream>
 
 void LinkedList::DeleteLinkedList(ListNode * root) {
@@ -205,4 +206,28 @@ ListNode * LinkedList::mergeTwoLists(ListNode* l1, ListNode* l2) {
     }
   }
   return merged_node;
+}
+
+ListNode * LinkedList::FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) {
+  std::stack<ListNode *> st1, st2;
+  ListNode * h1{pHead1}, * h2{pHead2}, *pre{nullptr};
+  if (pHead1) {
+    while (h1) {
+      st1.push(h1);
+      h1 = h1->next;
+    }
+    while (h2) {
+      st2.push(h2);
+      h2 = h2->next;
+    }
+    while (!st1.empty() && !st2.empty() && st1.top() == st2.top()) {
+      pre = st1.top();
+      st1.pop();
+      st2.pop();
+      if(!st1.empty() && !st2.empty() && st1.top() != st2.top()) {
+        break;
+      }
+    }
+  }
+  return pre;
 }

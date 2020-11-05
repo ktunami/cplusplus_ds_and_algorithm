@@ -72,6 +72,12 @@ public:
   ///@return Merged linked list
   ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
 
+  ///@brief Find the first common node (Nowcoder 66)
+  ///@param pHead1 : The 1st list
+  ///@param pHead2 : The 2nd list
+  ///@return The first common node
+  ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2);
+
 };
 
 

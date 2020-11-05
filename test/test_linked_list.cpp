@@ -102,3 +102,22 @@ TEST(TestLinkedList, mergeTwoLists) {
     ASSERT_EQ(result_vec.at(i), expected_vec.at(i));
   }
 }
+
+TEST(TestLinkedList, FindFirstCommonNode) {
+  LinkedList ls;
+  std::vector<int> input_vec1{1,3,5};
+  std::vector<int> input_vec2{2,4,6,7,8};
+  ListNode * list1{ls.CreatByTailInsert(input_vec1, false)};
+  ListNode * list2{ls.CreatByTailInsert(input_vec2, false)};
+  ListNode * l1_idx{list1}, *l2_idx{list2};
+  while(l1_idx && l1_idx->next) {
+    l1_idx = l1_idx->next;
+    l2_idx = l2_idx->next;
+  }
+  l1_idx->next = l2_idx;
+  /* 1-> 3-> 5
+   *         |
+   * 2-> 4-> 6-> 7-> 8
+   * */
+  ASSERT_EQ(ls.FindFirstCommonNode(list1,list2)->val, 6);
+}
