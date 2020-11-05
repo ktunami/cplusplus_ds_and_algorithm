@@ -44,6 +44,17 @@ public:
   ///@return Reversed linked list
   ListNode* ReverseList2(ListNode* pHead) ;
 
+  ///@brief Check if the linked list has cycle (Nowcoder 4)
+  ///@param head : Root of linked list
+  ///@return If has ring, return true
+  bool hasCycle(ListNode *head);
+
+  ///@brief Create linked list with cycle
+  ///@param vec : Num vector
+  ///@param pos : Index of the entry of the cycle (start from 0)
+  ///@return  linked list with cycle
+  ListNode * CreateCycleList(std::vector<int> const& vec, int pos);
+
 };
 
 

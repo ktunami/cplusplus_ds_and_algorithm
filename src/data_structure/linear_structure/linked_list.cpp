@@ -78,3 +78,52 @@ ListNode * LinkedList::ReverseList2(ListNode* pHead) {
   }
   return pre;
 }
+
+///@brief Check if the linked list has cycle (Nowcoder 4)
+///@param head : Root of linked list
+///@return If has ring, return true
+
+bool hasCycle(ListNode *head);
+
+ListNode * LinkedList::CreateCycleList(std::vector<int> const& vec, int pos) {
+  ListNode * result{nullptr};
+  if (pos < vec.size() && pos >= 0) {
+    result = CreatByTailInsert(vec, false);
+    ///Attention: Result is already defined, if write "auto result{...};" here
+    ///the compiler wont tell you it's a redefinition, because this is in "if block", which
+    ///would be considered as another variable different from "result" in line 89
+    ListNode * entry{result}, * last_ele{nullptr};
+    for (int i{0}; i < pos; ++i) {
+      entry = entry->next;
+    }
+    last_ele = entry;
+    auto remain_len{vec.size() - pos - 1};
+    for (int j{0}; j < remain_len; ++j) {
+      last_ele = last_ele->next;
+    }
+    last_ele->next = entry;
+  }
+  return result;
+}
+
+bool LinkedList::hasCycle(ListNode * head) {
+  bool result{false};
+  ListNode * slow_pt{head};
+  ListNode * fast_pt{head};
+  while (nullptr != slow_pt && nullptr != fast_pt) {
+    slow_pt = slow_pt->next;
+    fast_pt = fast_pt->next;
+    if (nullptr == fast_pt || nullptr == slow_pt) {
+      break;
+    }
+    fast_pt = fast_pt->next;
+    if (nullptr == fast_pt) {
+      break;
+    }
+    if (slow_pt == fast_pt) {
+      result = true;
+      break;
+    }
+  }
+  return result;
+}
