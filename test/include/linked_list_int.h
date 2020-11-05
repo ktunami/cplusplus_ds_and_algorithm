@@ -55,6 +55,23 @@ public:
   ///@return  linked list with cycle
   ListNode * CreateCycleList(std::vector<int> const& vec, int pos);
 
+  ///@brief Get the entry of cycle in linked list (Nowcoder 3)
+  ///@param head : Root of linked list
+  ///@return The entry of cycle, if no cycle, return nullptr
+  ListNode * detectCycle(ListNode *head);
+
+  ///@brief N members form a circle, del the mth element
+  /// each time, and start from the next place till only
+  /// one member remains in the circle (Nowcoder 132)
+  ///https://blog.csdn.net/likerxu/article/details/44891609
+  int ysf(int n, int m) ;
+
+  ///@brief Merge ordered linked list (Nowcoder 33)
+  ///@param l1 : The 1st list
+  ///@param l2 : The 2nd list
+  ///@return Merged linked list
+  ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
+
 };
 
 

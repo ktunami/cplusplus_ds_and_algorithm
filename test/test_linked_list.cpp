@@ -74,3 +74,31 @@ TEST(TestLinkedList, hasCycle) {
   ASSERT_TRUE(ls.hasCycle(lst_with_cycle));
   ASSERT_FALSE(ls.hasCycle(lst_without_cycle));
 }
+
+TEST(TestLinkedList, detectCycle) {
+  LinkedList ls;
+  std::vector<int> input_vec{0,1,2,3,4,5,6};
+  int pos{4};
+  auto lst_with_cycle{ls.CreateCycleList(input_vec, pos)};
+  ASSERT_EQ(ls.detectCycle(lst_with_cycle)->val, pos);
+}
+
+TEST(TestLinkedList, ysf) {
+  LinkedList ls;
+  ASSERT_EQ(ls.ysf(5,3),3);
+}
+
+TEST(TestLinkedList, mergeTwoLists) {
+  LinkedList ls;
+  std::vector<int> input_vec1{1,3,5};
+  std::vector<int> input_vec2{2,4,6,7,8};
+  std::vector<int> expected_vec{1,2,3,4,5,6,7,8};
+  ListNode * list1{ls.CreatByTailInsert(input_vec1, false)};
+  ListNode * list2{ls.CreatByTailInsert(input_vec2, false)};
+  ListNode * merged_list{ls.mergeTwoLists(list1,list2)};
+  std::vector<int> result_vec{ls.LinkedListTraversal(merged_list, false)};
+  ASSERT_EQ(result_vec.size(), expected_vec.size());
+  for (int i{0}; i < result_vec.size(); ++i) {
+    ASSERT_EQ(result_vec.at(i), expected_vec.at(i));
+  }
+}
