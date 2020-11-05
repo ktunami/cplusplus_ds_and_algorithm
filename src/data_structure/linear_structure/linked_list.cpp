@@ -208,7 +208,7 @@ ListNode * LinkedList::mergeTwoLists(ListNode* l1, ListNode* l2) {
   return merged_node;
 }
 
-ListNode * LinkedList::FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) {
+ListNode * LinkedList::FindFirstCommonNode(ListNode * pHead1, ListNode* pHead2) {
   std::stack<ListNode *> st1, st2;
   ListNode * h1{pHead1}, * h2{pHead2}, *pre{nullptr};
   if (pHead1) {
@@ -231,3 +231,35 @@ ListNode * LinkedList::FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2) 
   }
   return pre;
 }
+
+ListNode * LinkedList::reverseKGroup(ListNode * head, int k) {
+  ListNode *next_begin{head}, * result{nullptr}, * result_idx{head};
+  std::stack<ListNode *> st;
+  while (next_begin) {
+    int count{0};
+    while (next_begin && count < k) {
+      st.push(next_begin);
+      next_begin = next_begin->next;
+      ++count;
+    }
+    if (k == count) {
+      if(result == nullptr) {
+        result = st.top();
+        result_idx = result;
+        st.pop();
+      }
+      while(!st.empty()) {
+        result_idx->next = st.top();
+        result_idx = result_idx->next;
+        st.pop();
+      }
+      result_idx->next = next_begin;
+    }
+  }
+  if (result == nullptr) {
+    result = head;
+  }
+  return result;
+}
+
+ListNode * reverseKGroupInplace(ListNode * head, int k);

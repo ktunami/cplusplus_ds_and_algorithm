@@ -121,3 +121,32 @@ TEST(TestLinkedList, FindFirstCommonNode) {
    * */
   ASSERT_EQ(ls.FindFirstCommonNode(list1,list2)->val, 6);
 }
+
+
+std::vector<int> GetKReversedVec(std::vector<int> const& vec, int k) {
+  LinkedList ls;
+  ListNode * list{ls.CreatByTailInsert(vec, false)};
+  ListNode * re{ls.reverseKGroup(list,k)};
+  std::vector<int> result{ls.LinkedListTraversal(re, false)};
+  ls.DeleteLinkedList(re);
+  return result;
+}
+
+TEST(TestLinkedList, reverseKGroup) {
+  std::vector<int> input_vec{1,2,3,4,5};
+  int k1{1},k2{2},k3{6},k4{5};
+  std::vector<int> expected_result1{1,2,3,4,5};
+  std::vector<int> expected_result2{2,1,4,3,5};
+  std::vector<int> expected_result3{1,2,3,4,5};
+  std::vector<int> expected_result4{5,4,3,2,1};
+  auto vec1{GetKReversedVec(input_vec,k1)};
+  auto vec2{GetKReversedVec(input_vec,k2)};
+  auto vec3{GetKReversedVec(input_vec,k3)};
+  auto vec4{GetKReversedVec(input_vec,k4)};
+  for (int i{0}; i < 5; i++) {
+    ASSERT_EQ(expected_result1.at(i), vec1.at(i));
+    ASSERT_EQ(expected_result2.at(i), vec2.at(i));
+    ASSERT_EQ(expected_result3.at(i), vec3.at(i));
+    ASSERT_EQ(expected_result4.at(i), vec4.at(i));
+  }
+}

@@ -74,13 +74,27 @@ public:
   ///@param l1 : The 1st list
   ///@param l2 : The 2nd list
   ///@return Merged linked list
-  ListNode* mergeTwoLists(ListNode* l1, ListNode* l2);
+  ListNode * mergeTwoLists(ListNode* l1, ListNode* l2);
 
   ///@brief Find the first common node (Nowcoder 66)
   ///@param pHead1 : The 1st list
   ///@param pHead2 : The 2nd list
   ///@return The first common node
-  ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2);
+  ListNode * FindFirstCommonNode(ListNode * pHead1, ListNode * pHead2);
+
+  ///@brief Reverse Nodes in k-Group (by using stack)
+  ///@param head : Root of linked list
+  ///@param k : k-Group
+  ///@return Reversed group
+  ListNode * reverseKGroup(ListNode * head, int k);
+
+  ///@brief Reverse Nodes in k-Group (In place method)
+  ///@param head : Root of linked list
+  ///@param k : k-Group
+  ///@return Reversed group
+  ListNode * reverseKGroupInplace(ListNode * head, int k);
+
+
 };
 
 

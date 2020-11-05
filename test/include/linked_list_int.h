@@ -78,6 +78,18 @@ public:
   ///@return The first common node
   ListNode* FindFirstCommonNode( ListNode* pHead1, ListNode* pHead2);
 
+  ///@brief Reverse Nodes in k-Group (by using stack)
+  ///@param head : Root of linked list
+  ///@param k : k-Group
+  ///@return Reversed group
+  ListNode * reverseKGroup(ListNode * head, int k);
+
+  ///@brief Reverse Nodes in k-Group (In place method)
+  ///@param head : Root of linked list
+  ///@param k : k-Group
+  ///@return Reversed group
+  ListNode * reverseKGroupInplace(ListNode * head, int k);
+
 };
 
 
