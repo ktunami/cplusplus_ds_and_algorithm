@@ -94,6 +94,16 @@ public:
   ///@return Reversed group
   ListNode * reverseKGroupInplace(ListNode * head, int k);
 
+  ///@brief Delete duplicate elements in the linked list
+  ///@param head : Root of linked list
+  ///@return Linked list after processed
+  ListNode* deleteDuplicates(ListNode* head);
+
+  ///@brief Remove the Nth element from the end
+  ///@param head : Root of the lined list
+  ///@param n : the nth element from the end
+  ///@return The processed linked list
+  ListNode* removeNthFromEnd(ListNode* head, int n);
 
 };
 

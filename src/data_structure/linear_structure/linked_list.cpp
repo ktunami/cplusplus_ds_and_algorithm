@@ -80,11 +80,6 @@ ListNode * LinkedList::ReverseList2(ListNode* pHead) {
   return pre;
 }
 
-///@brief Check if the linked list has cycle (Nowcoder 4)
-///@param head : Root of linked list
-///@return If has ring, return true
-
-bool hasCycle(ListNode *head);
 
 ListNode * LinkedList::CreateCycleList(std::vector<int> const& vec, int pos) {
   ListNode * result{nullptr};
@@ -262,4 +257,98 @@ ListNode * LinkedList::reverseKGroup(ListNode * head, int k) {
   return result;
 }
 
-ListNode * reverseKGroupInplace(ListNode * head, int k);
+ListNode * LinkedList::reverseKGroupInplace(ListNode * head, int k) {
+  ListNode * result{nullptr}, * next_begin{head}, * this_begin{head};
+  ListNode * last_end{nullptr};
+  while (next_begin) {
+    int count{0};
+    while(next_begin && count < k) {
+      next_begin = next_begin->next;
+      ++count;
+    }
+    if (count == k) {
+      ListNode *cur{this_begin}, *pre{nullptr}, *next{nullptr};
+      for(int i{0}; i < k; ++i) { //reverse k nodes
+        next = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = next;
+      }
+      this_begin->next = next_begin; //this_begin is in the tail
+      if (!result) {
+        result = pre;
+      } else {
+        last_end->next = pre;
+      }
+      last_end = this_begin;
+      this_begin = next_begin;
+    } else {
+      break;
+    }
+  }
+  if(!result) {
+    result = head;
+  }
+  return result;
+}
+
+ListNode* LinkedList::deleteDuplicates(ListNode* head) {
+  ListNode * begin{head}, * cur{nullptr}, * last{nullptr};
+  std::stack<ListNode *> st;
+  while(begin && begin->next) {
+    cur = begin->next;
+    if (cur->val != begin->val) {
+      last = begin;
+      begin = begin->next;
+    } else {
+      st.push(begin);
+      while(cur && cur->val == begin->val) {
+        st.push(cur);
+        cur = cur->next;
+      }
+      if (head == begin) {
+        head = cur;
+      } else {
+        last->next = cur;
+      }
+      begin = cur;
+    }
+  }
+  while (!st.empty()) {
+    auto ptr{st.top()};
+    st.pop();
+    delete ptr;
+  }
+  return head;
+}
+
+ListNode* LinkedList::removeNthFromEnd(ListNode* head, int n) {
+  ListNode * result{nullptr};
+  std::stack<ListNode *> st;
+  ListNode * cur{head};
+  int count{0};
+  while (cur) {
+    st.push(cur);
+    ++count;
+    cur = cur->next;
+  }
+  if (count == n) {
+    ListNode * cur{head};
+    head = head->next;
+    result = head;
+    delete cur;
+  } else if (count > n) {
+    result = head;
+    int k = 0;
+    ListNode * to_be_del{nullptr}, *pre{nullptr};
+    while (k < n) {
+      ++k;
+      to_be_del = st.top();
+      st.pop();
+    }
+    pre = st.top();
+    pre ->next = to_be_del->next;
+    delete to_be_del;
+  }
+  return result;
+}
