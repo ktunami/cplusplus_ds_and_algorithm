@@ -372,3 +372,15 @@ TEST(TestLinkedList, reverseBetween) {
     ASSERT_EQ(expected_result.at(i), result.at(i));
   }
 }
+
+TEST(TestLinkedList, deleteDuplicatesNodes) {
+  std::vector<int> vec{3,3,4,4,5};
+  std::vector<int> expected_result{3,4,5};
+  LinkedList ls;
+  auto list{ls.CreatByTailInsert(vec,false)};
+  auto result{ls.LinkedListTraversal(ls.deleteDuplicatesNodes(list), false)};
+  ASSERT_EQ(expected_result.size(), result.size());
+  for(int i{0}; i < result.size(); ++i) {
+    ASSERT_EQ(expected_result.at(i), result.at(i));
+  }
+}

@@ -600,3 +600,17 @@ ListNode* LinkedList::reverseBetween(ListNode* head, int m, int n) {
   delete cur;
   return result;
 }
+
+ListNode* LinkedList::deleteDuplicatesNodes(ListNode* head) {
+  ListNode * pre{head};
+  while (pre && pre->next) {
+    if (pre->val == pre->next->val) {
+      auto cur{pre->next};
+      pre->next = cur->next;
+      delete cur;
+    } else {
+      pre = pre->next;
+    }
+  }
+  return head;
+}

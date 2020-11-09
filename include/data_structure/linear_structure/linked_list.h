@@ -156,6 +156,12 @@ public:
   ///@param n : to
   ///@return Processed linked list
   ListNode* reverseBetween(ListNode* head, int m, int n);
+
+  ///@brief Delete duplicate nodes (Nowcoder 25)
+  ///1→1→2, return 1→2
+  ///@param head : Root of linked list
+  ///@return Processed linked list
+  ListNode* deleteDuplicatesNodes(ListNode* head);
 };
 
 #endif//C_PRACTICE_LINKED_LIST_H
