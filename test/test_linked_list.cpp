@@ -384,3 +384,17 @@ TEST(TestLinkedList, deleteDuplicatesNodes) {
     ASSERT_EQ(expected_result.at(i), result.at(i));
   }
 }
+
+TEST(TestLinkedList, isPail) {
+  std::vector<std::vector<int>> inputs {
+    {3,4,4,3},
+    {3,4,3},
+    {3,4,4,3,6}
+  };
+  std::vector<bool> result{true, true, false};
+  LinkedList ls;
+  for (int i{0}; i < inputs.size(); ++i) {
+    auto list{ls.CreatByTailInsert(inputs.at(i),false)};
+    ASSERT_EQ(result.at(i), ls.isPail(list));
+  }
+}

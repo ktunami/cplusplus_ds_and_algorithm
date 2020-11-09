@@ -162,6 +162,11 @@ public:
   ///@param head : Root of linked list
   ///@return Processed linked list
   ListNode* deleteDuplicatesNodes(ListNode* head);
+
+  ///@brief Check if the linked list is pail (Nowcoder 96)
+  ///@param head : Input linked list
+  ///@return True if the linked list is pail
+  bool isPail(ListNode* head);
 };
 
 #endif//C_PRACTICE_LINKED_LIST_H

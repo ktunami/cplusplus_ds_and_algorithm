@@ -614,3 +614,23 @@ ListNode* LinkedList::deleteDuplicatesNodes(ListNode* head) {
   }
   return head;
 }
+
+bool LinkedList::isPail(ListNode* head) {
+  bool result{true};
+  ListNode * cur{head};
+  std::stack<ListNode *> st;
+  while(cur) {
+    st.push(cur);
+    cur = cur->next;
+  }
+  cur = head;
+  while(!st.empty()) {
+    if (st.top()->val != cur->val) {
+      result = false;
+      break;
+    }
+    st.pop();
+    cur = cur->next;
+  }
+  return result;
+}
