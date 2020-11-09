@@ -7,8 +7,10 @@
 
 #include "linked_list_int.h"
 #include <gtest/gtest.h>
+#include <functional>
 #include <iostream>
 #include <memory>
+#include <queue>
 
 TEST(TestLinkedList, CreatByTailInsert) {
   std::vector<int> input_vec{1,2,3,4,5};
@@ -238,4 +240,122 @@ TEST(TestLinkedList,removeNthFromEnd) {
   CheckRemoveNthFromEnd(input,expected_result2,n2);
   CheckRemoveNthFromEnd(input,expected_result3,n3);
   CheckRemoveNthFromEnd(input,expected_result4,n4);
+}
+
+void CheckOddEvenList(std::vector<int> &input, std::vector<int> &expected_result) {
+  LinkedList ls;
+  auto list{ls.CreatByTailInsert(input,false)};
+  auto re{ls.oddEvenList(list)};
+  auto vec{ls.LinkedListTraversal(re, false)};
+  ASSERT_EQ(vec.size(),expected_result.size());
+  for (int i{0}; i < vec.size(); ++i) {
+    ASSERT_EQ(vec.at(i), expected_result.at(i));
+  }
+}
+
+TEST(TestLinkedList, oddEvenList) {
+  std::vector<int> input1{1,2,3,4,5,6,7};
+  std::vector<int> expected_result1{1,3,5,7,2,4,6};
+  std::vector<int> input2{1,2,3,4,5,6};
+  std::vector<int> expected_result2{1,3,5,2,4,6};
+  std::vector<int> input3{1,2};
+  std::vector<int> expected_result3{1,2};
+  std::vector<int> input4{1};
+  std::vector<int> expected_result4{1};
+  CheckOddEvenList(input1,expected_result1);
+  CheckOddEvenList(input2,expected_result2);
+  CheckOddEvenList(input3,expected_result3);
+  CheckOddEvenList(input4,expected_result4);
+}
+
+void CheckSortInList(
+    std::vector<int> &input,
+    std::vector<int> &expected_result,
+    std::function<ListNode * (ListNode *)> sort_func) {
+  LinkedList ls;
+  auto origin{ls.CreatByTailInsert(input, false)};
+  auto sorted{sort_func(origin)};
+  auto vec{ls.LinkedListTraversal(sorted, false)};
+  ASSERT_EQ(vec.size(), expected_result.size());
+  for(int i{0}; i < vec.size(); ++i) {
+    ASSERT_EQ(vec.at(i), expected_result.at(i));
+  }
+}
+
+TEST(TestLinkedList, sortInList123) {
+  std::vector<std::vector<int>> inputs{
+    {1,3,2,5,4,0},
+    {0,1,2,3,4,5},
+    {5,4,3,2,1,0},
+    {3,1,2,4,5,0}
+  };
+  std::vector<int> expected_result{0,1,2,3,4,5};
+  LinkedList ls;
+  auto func1{std::bind(&LinkedList::sortInList, &ls, std::placeholders::_1)};
+  auto func2{std::bind(&LinkedList::sortInList2, &ls, std::placeholders::_1)};
+  auto func3{std::bind(&LinkedList::sortInList3, &ls, std::placeholders::_1)};
+  for (int i{0}; i < inputs.size(); ++i) {
+    CheckSortInList(inputs.at(i), expected_result, func1);
+    CheckSortInList(inputs.at(i), expected_result, func2);
+    CheckSortInList(inputs.at(i), expected_result, func3);
+  }
+}
+
+void CheckAddInList(
+    std::vector<int> &input1,
+    std::vector<int> &input2,
+    std::vector<int> &expected_result) {
+  LinkedList ls;
+  auto list1{ls.CreatByTailInsert(input1, false)};
+  auto list2{ls.CreatByTailInsert(input2, false)};
+  auto list3{ls.addInList(list1, list2)};
+  auto result{ls.LinkedListTraversal(list3, false)};
+  ASSERT_EQ(expected_result.size(), result.size());
+  for(int i{0}; i < result.size(); ++i) {
+    ASSERT_EQ(expected_result.at(i), result.at(i));
+  }
+}
+
+TEST(TestLinkedList, addInList) {
+  std::vector<std::vector<int>> input1{
+    {9,3,7},
+    {1,1,1,1},
+    {1,0,9,9}
+  };
+  std::vector<std::vector<int>> input2{
+    {6,3},
+    {2,2,2,2},
+    {2,2}
+  };
+  std::vector<std::vector<int>> expected_result{
+    {1,0,0,0},
+    {3,3,3,3},
+    {1,1,2,1}
+  };
+  for (int i{0}; i < input1.size(); ++i) {
+    CheckAddInList(input1.at(i),input2.at(i),expected_result.at(i));
+  }
+}
+
+void CheckMergeKLists (
+    std::vector<std::vector<int>> &inputs,
+    std::vector<int> &expected_result) {
+  std::vector<ListNode *> lists;
+  LinkedList ls;
+  for (int i{0}; i < inputs.size(); ++i) {
+    lists.push_back(ls.CreatByTailInsert(inputs.at(i), false));
+  }
+  auto result{ls.LinkedListTraversal(ls.mergeKLists(lists), false)};
+  ASSERT_EQ(expected_result.size(), result.size());
+  for(int i{0}; i < result.size(); ++i) {
+    ASSERT_EQ(expected_result.at(i), result.at(i));
+  }
+}
+
+TEST(TestLinkedList, mergeKLists){
+  std::vector<std::vector<int>> inputs{
+    {1,4,5}, {1,3,4}, {2,6}
+  };
+  std::vector<int> expected_result{1,1,2,3,4,4,5,6};
+  CheckMergeKLists(inputs, expected_result);
 }

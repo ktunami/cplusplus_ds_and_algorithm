@@ -7,6 +7,7 @@
 
 #include "data_structure/linear_structure/linked_list.h"
 #include <stack>
+#include <queue>
 #include <iostream>
 
 void LinkedList::DeleteLinkedList(ListNode * root) {
@@ -351,4 +352,213 @@ ListNode* LinkedList::removeNthFromEnd(ListNode* head, int n) {
     delete to_be_del;
   }
   return result;
+}
+
+ListNode* LinkedList::oddEvenList(ListNode* head) {
+  ListNode * even_list{nullptr}, * pre{head}, * cur{nullptr}, *idx_even{nullptr}, *lst{head};
+  while(pre && pre->next) {
+    lst = pre;
+    cur = pre->next;
+    pre->next = cur->next;
+    cur->next = nullptr; //Add this or else there will be a cycle!!
+    pre = pre->next;
+    if (!even_list) {
+      even_list = cur;
+      idx_even = cur;
+    } else {
+      idx_even->next = cur;
+      idx_even = idx_even->next;
+    }
+  }
+  if (pre) {
+    pre->next = even_list;
+  } else {
+    lst->next = even_list;
+  }
+  return head;
+}
+
+ListNode * LinkedList::sortInList(ListNode* head) {
+  std::stack<ListNode *> st;
+  while(head) {
+    auto cur{head};
+    head = head->next;
+    while (!st.empty() && cur->val < st.top()->val) {
+      auto tp{st.top()};
+      tp->next = head;
+      head = tp;
+      st.pop();
+    }
+    st.push(cur);
+  }
+  while(!st.empty()) {
+    auto tp{st.top()};
+    tp->next = head;
+    head = tp;
+    st.pop();
+  }
+  return head;
+}
+
+ListNode * LinkedList::GetMiddle(ListNode * start, ListNode * end) {
+  ListNode * p{start}, * q{start}, *last{nullptr} ;
+  while (p != end) {
+    while (p != end && p->val <= start->val) {
+      last = p;
+      p = p->next;
+    }
+    if (p != end) {
+      if (!q) {
+        q = p->next;
+      }
+      while (q!= end && q->val > start->val) {
+        q = q->next;
+      }
+      if (q!= end) {
+        int tmp{p->val};
+        p->val = q->val;
+        q->val = tmp;
+      } else {
+        break;
+      }
+    }
+  }
+  if (last != start) {
+    int tmp{start->val};
+    start->val = last->val;
+    last->val = tmp;
+  }
+  return last;
+}
+
+void LinkedList::SortLinkedList(ListNode * start, ListNode * end) {
+  if (start != end) {
+    auto middle{GetMiddle(start, end)};
+    SortLinkedList(start, middle);
+    SortLinkedList(middle->next, end);
+  }
+}
+
+ListNode* LinkedList::sortInList2(ListNode* head) {
+  SortLinkedList(head, nullptr);
+  return head;
+}
+
+ListNode* LinkedList::sortInList3(ListNode* head) {
+  if (!head || !head->next) {
+    return head;
+  }
+  ListNode * slow{head}, * fast{head->next};
+  while(fast && fast->next) {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  ListNode * head2{slow->next};
+  slow->next = nullptr;
+  ListNode * lst1{sortInList(head)};
+  ListNode * lst2{sortInList(head2)};
+  ListNode * final_node{new ListNode(100)};
+  ListNode * cur{final_node};
+  while (lst1 && lst2) {
+    if (lst1->val < lst2->val) {
+      cur->next = lst1;
+      lst1 = lst1->next;
+    } else {
+      cur->next = lst2;
+      lst2 = lst2->next;
+    }
+    cur = cur->next;
+  }
+  cur->next = lst1 ? lst1 : lst2;
+  cur = final_node;
+  final_node = final_node->next;
+  delete cur;
+  return final_node;
+}
+
+ListNode* LinkedList::addInList(ListNode* head1, ListNode* head2) {
+  std::stack<ListNode *> st1, st2;
+  ListNode * idx1{head1}, * idx2{head2}, * result{nullptr};
+  while (idx1) {
+    st1.push(idx1);
+    idx1 = idx1->next;
+  }
+  while (idx2) {
+    st2.push(idx2);
+    idx2 = idx2->next;
+  }
+  int carry{0};
+  while (!st1.empty() && !st2.empty()) {
+    auto sum{st1.top()->val + st2.top()->val + carry};
+    auto cur{new ListNode(sum % 10)};
+    cur->next = result;
+    result = cur;
+    if (sum >= 10) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    st1.pop();
+    st2.pop();
+  }
+  while (!st1.empty()) {
+    auto sum{st1.top()->val + carry};
+    auto cur{new ListNode(sum % 10)};
+    cur->next = result;
+    result = cur;
+    if (sum >= 10) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    st1.pop();
+  }
+  while (!st2.empty()) {
+    auto sum{st2.top()->val + carry};
+    auto cur{new ListNode(sum % 10)};
+    cur->next = result;
+    result = cur;
+    if (sum >= 10) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    st2.pop();
+  }
+  if (carry == 1) {
+    auto cur{new ListNode(1)};
+    cur->next = result;
+    result = cur;
+  }
+  return result;
+}
+
+
+
+ListNode *LinkedList::mergeKLists(std::vector<ListNode *> &lists) {
+   ListNode * result{new ListNode(0)};
+   ListNode * cur{result};
+   ///@ATTENTION: std::greater<int> ==> Min heap
+   ///               std::less<int> ==> Max heap
+   auto cmp = [] (ListNode * p1, ListNode * p2) {
+     return p1->val > p2->val;
+   };
+   std::priority_queue<ListNode *, std::vector<ListNode *>, decltype(cmp)> qu(cmp);
+   for (int i{0}; i < lists.size(); ++i) {
+     qu.push(lists.at(i));
+   }
+   while(!qu.empty()) {
+     auto idx{qu.top()};
+     qu.pop();
+     cur->next = idx;
+     cur = idx;
+     if (idx->next) {
+       qu.push(idx->next);
+     }
+     idx->next = nullptr;
+   }
+   cur = result;
+   result = result->next;
+   delete cur;
+   return result;
 }

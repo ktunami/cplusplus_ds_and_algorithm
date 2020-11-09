@@ -18,6 +18,7 @@ struct ListNode {
 
 class LinkedList {
 public:
+
   ///@brief Delete a linked list
   void DeleteLinkedList(ListNode * root);
 
@@ -100,6 +101,49 @@ public:
   ///@param n : the nth element from the end
   ///@return The processed linked list
   ListNode* removeNthFromEnd(ListNode* head, int n);
+
+  ///@brief Group all odd nodes together followed by the even nodes
+  ///@param head : Root of linked list
+  ///@return Processed linked list
+  ListNode* oddEvenList(ListNode* head);
+
+  ///@brief Sort linkee list(asscending) (Nowcoder 70)
+  ///@param head : Root of linked list
+  ///@return Sorted linked list
+  ListNode* sortInList(ListNode* head);
+
+  ///@brief Get middle, used in sortInList2
+  ///@param start : Head node pointer
+  ///@param end : Final node pointer
+  ///@return Middle pointer
+  ListNode * GetMiddle(ListNode * start, ListNode * end);
+
+  ///@brief Quick sort, used in sortInList2
+  ///@param start : Head node pointer
+  ///@param end : Final node pointer
+  void SortLinkedList(ListNode * start, ListNode * end);
+
+  ///@brief Sort linkee list(asscending) (Nowcoder 70) use quick sort
+  ///@param head : Root of linked list
+  ///@return Sorted linked list
+  ListNode* sortInList2(ListNode* head);
+
+  ///@brief Sort linkee list(asscending) (Nowcoder 70) use merge sort
+  ///@param head : Root of linked list
+  ///@return Sorted linked list
+  ListNode* sortInList3(ListNode* head);
+
+  ///@brief Do addition by using linked list, each list represents
+  /// a decimal number. (Nowcoder 40)
+  ///@param head1 : List 1
+  ///@param head2 : List 2
+  ///@return Addition result
+  ListNode* addInList(ListNode* head1, ListNode* head2);
+
+  ///@brief Merge-sort of k sorted linked list (Nowcoder 51)
+  ///@param lists : K sorted linked lists
+  ///@return Merged linked list
+  ListNode *mergeKLists(std::vector<ListNode *> &lists);
 };
 
 
