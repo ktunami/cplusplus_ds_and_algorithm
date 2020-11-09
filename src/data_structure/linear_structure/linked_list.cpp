@@ -562,3 +562,41 @@ ListNode *LinkedList::mergeKLists(std::vector<ListNode *> &lists) {
    delete cur;
    return result;
 }
+
+ListNode* LinkedList::reverseBetween(ListNode* head, int m, int n) {
+  ListNode * head_node{new ListNode(0)};
+  head_node->next = head;
+  head = head_node;
+  ListNode * result{head}, * m_idx{head}, * m_pre_idx{head};
+  ListNode * n_idx{head}, * n_post_idx{head};
+  int count_n{0}, count_m{0};
+  if (m < n && m > 0) {
+    while(m_idx && count_m < m) {
+      m_pre_idx = m_idx;
+      m_idx = m_idx->next;
+      ++count_m;
+    }
+    while(n_idx && count_n < n) {
+      n_idx = n_idx->next;
+      ++count_n;
+    }
+    if (m_idx && n_idx) {
+      n_post_idx = n_idx->next;
+      ListNode * pre{nullptr}, *cur{m_idx}, *nxt{nullptr};
+      n_idx->next = nullptr;
+      while (cur) {
+        nxt = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = nxt;
+      }
+      m_pre_idx->next = pre;
+      m_idx->next = n_post_idx;
+    }
+  }
+  auto cur{head};
+  head = head->next;
+  result = head;
+  delete cur;
+  return result;
+}

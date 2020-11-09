@@ -149,7 +149,13 @@ public:
   ///@return Merged linked list
   ListNode *mergeKLists(std::vector<ListNode *> &lists);
 
-
+  ///@brief Reverse elements between mth and nth element in the linked list (Nowcoder 21)
+  /// 1 <= m <= n <= list size
+  ///@param head : Root of linked list
+  ///@param m : from
+  ///@param n : to
+  ///@return Processed linked list
+  ListNode* reverseBetween(ListNode* head, int m, int n);
 };
 
 #endif//C_PRACTICE_LINKED_LIST_H
