@@ -8,7 +8,7 @@
 #ifndef C_PRACTICE_STATCK_PROBLEM_H
 #define C_PRACTICE_STATCK_PROBLEM_H
 
-#include "data_structure/tree/binary_tree.h"
+#include "binary_tree.h"
 #include <stack>
 #include <vector>
 

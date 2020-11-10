@@ -5,7 +5,7 @@
 * Update: 2020/11/3.
 ***************************************************/
 
-#include "data_structure/linear_structure/queue_problem.h"
+#include "queue_problem.h"
 #include <deque>
 #include <iostream>
 

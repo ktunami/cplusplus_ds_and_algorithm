@@ -5,7 +5,7 @@
 * Update: 2020/10/25.
 ***************************************************/
 
-#include "dp_dc/recursive.h"
+#include "recursive.h"
 
 void Recursive::ReverseStack(std::stack<int> &st) {
   if (!st.empty()) {

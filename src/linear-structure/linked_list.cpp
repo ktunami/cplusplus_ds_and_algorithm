@@ -5,7 +5,7 @@
 * Update: 2020/11/2.
 ***************************************************/
 
-#include "data_structure/linear_structure/linked_list.h"
+#include "linked_list.h"
 #include <stack>
 #include <queue>
 #include <iostream>

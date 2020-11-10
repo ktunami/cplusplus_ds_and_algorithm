@@ -5,7 +5,7 @@
 * Update: 2020/11/2.
 ***************************************************/
 
-#include "data_structure/tree/binary_tree.h"
+#include "binary_tree.h"
 
 void BinaryTree::Traversal(BTNode const * const rt, std::vector<int> &vec, TraversalType type) {
   vec.clear();

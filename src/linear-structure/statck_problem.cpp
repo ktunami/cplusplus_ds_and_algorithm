@@ -5,7 +5,7 @@
 * Update: 2020/11/2.
 ***************************************************/
 
-#include "data_structure/linear_structure/statck_problem.h"
+#include "statck_problem.h"
 
 BTNode* StackProblem::constructMaximumBinaryTree(std::vector<int>& nums) {
   std::stack<std::pair<BTNode *, BTNode *>> son_father_ptrs;
