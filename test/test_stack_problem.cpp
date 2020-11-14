@@ -5,8 +5,11 @@
 * Update: 2020/11/2.
 ***************************************************/
 
-#include "stack_problem_int.h"
 #include <gtest/gtest.h>
+
+#include "stack_problem_int.h"
+#include "common_test_method.h"
+
 
 TEST(StackProblem, constructMaximumBinaryTree) {
   StackProblem sl;
@@ -15,9 +18,7 @@ TEST(StackProblem, constructMaximumBinaryTree) {
   std::vector<int> result_vec;
   auto tr{sl.constructMaximumBinaryTree(vec)};
   bt.Traversal(tr, result_vec, BinaryTree::TraversalType::IN_ORDER);
-  for (int i{0}; i < vec.size(); ++i) {
-    ASSERT_EQ(vec.at(i), result_vec.at(i));
-  }
+  CheckIntVecEquality(result_vec, vec);
 }
 
 TEST(StackProblem, dailyTemperatures) {
@@ -25,10 +26,7 @@ TEST(StackProblem, dailyTemperatures) {
   std::vector<int> vec{73,74,75,71,69,72,76,73};
   std::vector<int> expected_result{1,1,4,2,1,1,0,0};
   auto result{sl.dailyTemperatures(vec)};
-  ASSERT_EQ(result.size(), expected_result.size());
-  for (int i{0}; i < vec.size(); ++i) {
-    ASSERT_EQ(result.at(i), expected_result.at(i));
-  }
+  CheckIntVecEquality(expected_result, result);
 }
 
 TEST(StackProblem, largestRectangleArea) {

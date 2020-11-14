@@ -5,25 +5,23 @@
 * Update: 2020/11/2.
 ***************************************************/
 
-#include "linked_list_int.h"
 #include <gtest/gtest.h>
 #include <functional>
 #include <iostream>
 #include <memory>
-#include <queue>
+
+#include "linked_list_int.h"
+#include "common_test_method.h"
 
 TEST(TestLinkedList, CreatByTailInsert) {
   std::vector<int> input_vec{1,2,3,4,5};
-  auto len{input_vec.size()};
   LinkedList ls;
   ListNode * with_head{ls.CreatByTailInsert(input_vec, true)};
   ListNode * without_head{ls.CreatByTailInsert(input_vec, false)};
   std::vector<int> with_head_vec{ls.LinkedListTraversal(with_head,true)};
   std::vector<int> without_head_vec{ls.LinkedListTraversal(without_head, false)};
-  for (int i{0}; i < len; ++i) {
-    ASSERT_EQ(input_vec.at(i), with_head_vec.at(i));
-    ASSERT_EQ(input_vec.at(i), without_head_vec.at(i));
-  }
+  CheckIntVecEquality(input_vec, with_head_vec);
+  CheckIntVecEquality(input_vec, without_head_vec);
   ls.DeleteLinkedList(with_head);
   ls.DeleteLinkedList(without_head);
 }
@@ -99,10 +97,7 @@ TEST(TestLinkedList, mergeTwoLists) {
   ListNode * list2{ls.CreatByTailInsert(input_vec2, false)};
   ListNode * merged_list{ls.mergeTwoLists(list1,list2)};
   std::vector<int> result_vec{ls.LinkedListTraversal(merged_list, false)};
-  ASSERT_EQ(result_vec.size(), expected_vec.size());
-  for (int i{0}; i < result_vec.size(); ++i) {
-    ASSERT_EQ(result_vec.at(i), expected_vec.at(i));
-  }
+  CheckIntVecEquality(result_vec, expected_vec);
 }
 
 TEST(TestLinkedList, FindFirstCommonNode) {
@@ -145,12 +140,10 @@ TEST(TestLinkedList, reverseKGroup) {
   auto vec2{GetKReversedVec(input_vec,k2)};
   auto vec3{GetKReversedVec(input_vec,k3)};
   auto vec4{GetKReversedVec(input_vec,k4)};
-  for (int i{0}; i < 5; i++) {
-    ASSERT_EQ(expected_result1.at(i), vec1.at(i));
-    ASSERT_EQ(expected_result2.at(i), vec2.at(i));
-    ASSERT_EQ(expected_result3.at(i), vec3.at(i));
-    ASSERT_EQ(expected_result4.at(i), vec4.at(i));
-  }
+  CheckIntVecEquality(expected_result1,vec1);
+  CheckIntVecEquality(expected_result2,vec2);
+  CheckIntVecEquality(expected_result3,vec3);
+  CheckIntVecEquality(expected_result4,vec4);
 }
 
 std::vector<int> GetKReversedVecInplace(std::vector<int> const& vec, int k) {
@@ -162,15 +155,6 @@ std::vector<int> GetKReversedVecInplace(std::vector<int> const& vec, int k) {
   return result;
 }
 
-void PrintVector(std::vector<int> &vec) {
-  static int j = 1;
-  std::cout << "group : " << j << std::endl;
-  for (int i{0}; i < vec.size(); ++i) {
-    std::cout << vec.at(i) << "--";
-  }
-  std::cout << std::endl;
-  ++j;
-}
 
 TEST(TestLinkedList, reverseKGroupInplace) {
   std::vector<int> input_vec{1,2,3,4,5};
@@ -183,12 +167,10 @@ TEST(TestLinkedList, reverseKGroupInplace) {
   auto vec2{GetKReversedVecInplace(input_vec,k2)};
   auto vec3{GetKReversedVecInplace(input_vec,k3)};
   auto vec4{GetKReversedVecInplace(input_vec,k4)};
-  for (int i{0}; i < 5; i++) {
-    ASSERT_EQ(expected_result1.at(i), vec1.at(i));
-    ASSERT_EQ(expected_result2.at(i), vec2.at(i));
-    ASSERT_EQ(expected_result3.at(i), vec3.at(i));
-    ASSERT_EQ(expected_result4.at(i), vec4.at(i));
-  }
+  CheckIntVecEquality(expected_result1,vec1);
+  CheckIntVecEquality(expected_result2,vec2);
+  CheckIntVecEquality(expected_result3,vec3);
+  CheckIntVecEquality(expected_result4,vec4);
 }
 
 void CheckDeleteDuplicates(std::vector<int> &input, std::vector<int> &expected_result) {
@@ -196,10 +178,7 @@ void CheckDeleteDuplicates(std::vector<int> &input, std::vector<int> &expected_r
   auto origin_list{ls.CreatByTailInsert(input, false)};
   auto processed_list{ls.deleteDuplicates(origin_list)};
   auto re{ls.LinkedListTraversal(processed_list, false)};
-  ASSERT_EQ(expected_result.size(), re.size());
-  for (int i{0}; i < re.size(); ++i) {
-    ASSERT_EQ(expected_result.at(i), re.at(i));
-  }
+  CheckIntVecEquality(expected_result,re);
 }
 
 
@@ -223,10 +202,7 @@ void CheckRemoveNthFromEnd(std::vector<int> &input, std::vector<int> &expected_r
   auto list{ls.CreatByTailInsert(input,false)};
   auto re{ls.removeNthFromEnd(list, n)};
   auto vec{ls.LinkedListTraversal(re, false)};
-  ASSERT_EQ(vec.size(),expected_result.size());
-  for (int i{0}; i < vec.size(); ++i) {
-    ASSERT_EQ(vec.at(i), expected_result.at(i));
-  }
+  CheckIntVecEquality(expected_result,vec);
 }
 
 TEST(TestLinkedList,removeNthFromEnd) {
@@ -247,10 +223,7 @@ void CheckOddEvenList(std::vector<int> &input, std::vector<int> &expected_result
   auto list{ls.CreatByTailInsert(input,false)};
   auto re{ls.oddEvenList(list)};
   auto vec{ls.LinkedListTraversal(re, false)};
-  ASSERT_EQ(vec.size(),expected_result.size());
-  for (int i{0}; i < vec.size(); ++i) {
-    ASSERT_EQ(vec.at(i), expected_result.at(i));
-  }
+  CheckIntVecEquality(expected_result,vec);
 }
 
 TEST(TestLinkedList, oddEvenList) {
@@ -276,10 +249,7 @@ void CheckSortInList(
   auto origin{ls.CreatByTailInsert(input, false)};
   auto sorted{sort_func(origin)};
   auto vec{ls.LinkedListTraversal(sorted, false)};
-  ASSERT_EQ(vec.size(), expected_result.size());
-  for(int i{0}; i < vec.size(); ++i) {
-    ASSERT_EQ(vec.at(i), expected_result.at(i));
-  }
+  CheckIntVecEquality(expected_result,vec);
 }
 
 TEST(TestLinkedList, sortInList123) {
@@ -310,10 +280,7 @@ void CheckAddInList(
   auto list2{ls.CreatByTailInsert(input2, false)};
   auto list3{ls.addInList(list1, list2)};
   auto result{ls.LinkedListTraversal(list3, false)};
-  ASSERT_EQ(expected_result.size(), result.size());
-  for(int i{0}; i < result.size(); ++i) {
-    ASSERT_EQ(expected_result.at(i), result.at(i));
-  }
+  CheckIntVecEquality(expected_result,result);
 }
 
 TEST(TestLinkedList, addInList) {
@@ -346,10 +313,7 @@ void CheckMergeKLists (
     lists.push_back(ls.CreatByTailInsert(inputs.at(i), false));
   }
   auto result{ls.LinkedListTraversal(ls.mergeKLists(lists), false)};
-  ASSERT_EQ(expected_result.size(), result.size());
-  for(int i{0}; i < result.size(); ++i) {
-    ASSERT_EQ(expected_result.at(i), result.at(i));
-  }
+  CheckIntVecEquality(expected_result,result);
 }
 
 TEST(TestLinkedList, mergeKLists){
@@ -367,10 +331,7 @@ TEST(TestLinkedList, reverseBetween) {
   LinkedList ls;
   auto list{ls.CreatByTailInsert(vec,false)};
   auto result{ls.LinkedListTraversal(ls.reverseBetween(list,m,n), false)};
-  ASSERT_EQ(expected_result.size(), result.size());
-  for(int i{0}; i < result.size(); ++i) {
-    ASSERT_EQ(expected_result.at(i), result.at(i));
-  }
+  CheckIntVecEquality(expected_result,result);
 }
 
 TEST(TestLinkedList, deleteDuplicatesNodes) {
@@ -379,10 +340,7 @@ TEST(TestLinkedList, deleteDuplicatesNodes) {
   LinkedList ls;
   auto list{ls.CreatByTailInsert(vec,false)};
   auto result{ls.LinkedListTraversal(ls.deleteDuplicatesNodes(list), false)};
-  ASSERT_EQ(expected_result.size(), result.size());
-  for(int i{0}; i < result.size(); ++i) {
-    ASSERT_EQ(expected_result.at(i), result.at(i));
-  }
+  CheckIntVecEquality(expected_result,result);
 }
 
 TEST(TestLinkedList, isPail) {

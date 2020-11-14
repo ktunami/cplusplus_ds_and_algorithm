@@ -5,8 +5,10 @@
 * Update: 2020/11/3.
 ***************************************************/
 
-#include "queue_problem_int.h"
 #include <gtest/gtest.h>
+
+#include "queue_problem_int.h"
+#include "common_test_method.h"
 
 
 TEST(QueueProblem, maxSlidingWindow) {
@@ -15,10 +17,7 @@ TEST(QueueProblem, maxSlidingWindow) {
   int k = 3;
   QueueProblem qu;
   auto result{qu.maxSlidingWindow(data, k)};
-  ASSERT_EQ(expected_result.size(), result.size());
-  for (int i{0}; i < result.size(); ++i) {
-    ASSERT_EQ(result.at(i), expected_result.at(i));
-  }
+  CheckIntVecEquality(expected_result,result);
 }
 
 TEST(QueueProblem, getNum) {
