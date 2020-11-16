@@ -8,6 +8,8 @@
 #include "array_problem.h"
 #include <queue>
 #include <unordered_map>
+#include <iostream>
+#include <set>
 
 std::vector<int> ArrayProblem::GetLeastNumbers_Solution(std::vector<int> input, int k) {
   std::priority_queue<int,std::vector<int>,std::greater<int>> qu;
@@ -161,12 +163,130 @@ std::vector<std::vector<int> > ArrayProblem::threeSum(std::vector<int> &num) {
   return result;
 }
 
+double ArrayProblem::findMedianSortedArrays(std::vector<int>& nums1, std::vector<int>& nums2) {
+  if (nums1.size() > nums2.size()) {
+    return findMedianSortedArrays(nums2, nums1);
+  }
+  int len1 = nums1.size(), len2 = nums2.size();
+  int left = 0;
+  int right = nums1.size();
+  int left_max, right_min;
+  int k = (len1 + len2 + 1) / 2;
+  while (left <= right) {
+    int i = (left + right) / 2;
+    int j = k - i;
+    int arr1_left = (i == 0) ? INT_MIN : nums1.at(i - 1);
+    int arr1_right = (i == len1) ? INT_MAX : nums1.at(i);
+    int arr2_left = (j == 0) ? INT_MIN : nums2.at(j - 1);
+    int arr2_right = (j == len2) ? INT_MAX : nums2.at(j);
+    left_max = std::max(arr1_left, arr2_left);
+    right_min = std::min(arr1_right, arr2_right);
+    if (left_max < right_min) {
+       break;
+    } else if (arr2_left >= arr1_right){
+       left = i + 1;
+    } else {
+      right = i - 1;
+    }
+  }
+  return ((len1 + len2) % 2 == 1) ? left_max : (left_max + right_min) / 2.0;
+}
 
+int ArrayProblem::minNumberdisappered(std::vector<int>& arr) {
+  int len = arr.size();
+  for (int i{0}; i < len; ++i) {
+    if (arr.at(i) > 0 && arr.at(i) < len && arr.at(arr.at(i) - 1) != arr.at(i)) {
+      std::swap(arr.at(arr.at(i - 1)), arr.at(i));
+    }
+  }
+  for (int i{0}; i < len; ++i) {
+    if (arr.at(i) != i + 1) {
+      return i + 1;
+    }
+  }
+  return len + 1;
+}
 
+std::vector<Interval> ArrayProblem::MergeIntevals(std::vector<Interval> &intervals) {
+  std::sort(intervals.begin(), intervals.end(),[](Interval &ob1, Interval &ob2){
+    return ob1.start < ob2.start;
+  });
+  std::vector<Interval> result;
+  for (int i{0}; i < intervals.size(); ++i) {
+    auto cur{intervals.at(i)};
+    if (result.size() == 0) {
+      result.push_back(cur);
+    } else {
+      Interval & last_one{result.back()};
+      if (cur.start <= last_one.end) {
+        last_one.end = (cur.end > last_one.end) ? cur.end : last_one.end;
+      } else {
+        result.push_back(cur);
+      }
+    }
+  }
+  return result;
+}
 
+std::vector<std::vector<int> > ArrayProblem::rotateMatrix(std::vector<std::vector<int> > mat, int n) {
+  std::vector<std::vector<int> > result(n,std::vector<int>(n,0));
+  for (int row{0}; row < n; ++row) {
+    for (int col{0}; col < n; ++col) {
+      result.at(row).at(col) = mat.at(n - col - 1).at(row);
+    }
+  }
+  return result;
+}
 
+int ArrayProblem::MLS(std::vector<int>& arr) {
+  std::set<int> hs;
+  int result = 1;
+  for (auto num : arr) {
+    hs.insert(num);
+  }
+  for (auto num : arr) {
+    if (!hs.count(num-1)) {
+      int count = 1;
+      int cur = num;
+      while (hs.count(cur+1)) {
+        ++count;
+        cur = cur + 1;
+      }
+      result = count > result ? count : result;
+    }
+  }
+  return result;
+}
 
+int ArrayProblem::InversePairs(std::vector<int> &data) {
+  int result{0};
+  for(int i{1}; i < data.size(); ++i) {
+    int tmp{data.at(i)};
+    int k = i - 1;
+    while (k >= 0 && data.at(k) > tmp) {
+      data[k+1] = data[k];
+      --k;
+      ++result;
+    }
+    data[k+1] = tmp;
+  }
+  return result;
+}
 
+int ArrayProblem::InversePairs2(std::vector<int> &data) {
+  int result{0};
+  std::vector<int> sorted_vec(data.size(),0);
+  std::function<void(std::vector<int> &arr, int from, int to)> merge_sort;
+  merge_sort = [&](std::vector<int> &arr, int from, int to){
+    if (from < to) {
+      auto mid{(from + to) >> 2};
+      merge_sort(arr, from, mid);
+      merge_sort(arr,mid + 1, to);
+      int i{mid}, j{to};
+      while (i >= from && j >= mid + 1) {
 
+      }
 
-
+    }
+  };
+}

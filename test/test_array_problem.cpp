@@ -122,3 +122,51 @@ TEST(ArrayProblem, threeSum) {
     }
   }
 }
+
+TEST(ArrayProblem, findMedianSortedArrays) {
+  std::vector<int> nums1{1,3};
+  std::vector<int> nums2{2};
+  ArrayProblem arr;
+  double num = arr.findMedianSortedArrays(nums1, nums2);
+  ASSERT_EQ(num, 2.00);
+}
+
+
+TEST(ArrayProblem, minNumberdisappered) {
+  std::vector<int> nums{1,3};
+  int result{2};
+  ArrayProblem arr;
+  double num = arr.minNumberdisappered(nums);
+  ASSERT_EQ(num,result);
+}
+
+
+TEST(ArrayProblem, MergeIntevals) {
+  std::vector<Interval> input{
+    {10,30},{20,60},{80,100},{150,180}
+  };
+  std::vector<Interval> expected_output{
+    {10,60},{80,100},{150,180}
+  };
+  ArrayProblem arr;
+  auto result{arr.MergeIntevals(input)};
+  ASSERT_EQ(expected_output.size(), result.size());
+  for(int i{0}; i < result.size(); ++i) {
+    ASSERT_EQ(expected_output.at(i).start, result.at(i).start);
+    ASSERT_EQ(expected_output.at(i).end, result.at(i).end);
+  }
+}
+
+TEST(ArrayProblem, MLS) {
+  std::vector<int> input{100,4,200,1,3,2};
+  ArrayProblem arr;
+  ASSERT_EQ(arr.MLS(input), 4);
+}
+
+TEST(ArrayProblem, InversePairs) {
+  std::vector<int> input{100,4,200,1,3,2};
+  ArrayProblem arr;
+  auto result{arr.InversePairs(input)};
+  std::cout << result << "--" << std::endl;
+  PrintVector(input);
+}
