@@ -164,9 +164,18 @@ TEST(ArrayProblem, MLS) {
 }
 
 TEST(ArrayProblem, InversePairs) {
-  std::vector<int> input{100,4,200,1,3,2};
+  std::vector<int> input1{100,4,200,1,3,2};
+  std::vector<int> input2{100,4,200,1,3,2};
   ArrayProblem arr;
-  auto result{arr.InversePairs(input)};
-  std::cout << result << "--" << std::endl;
-  PrintVector(input);
+  auto result1{arr.InversePairs(input1)};
+  auto result2{arr.InversePairs2(input2)};
+  ASSERT_EQ(result1,result2);
+}
+
+TEST(ArrayProblem, RightCircularShift) {
+  std::vector<int> input{1,2,3,4,5,6};
+  std::vector<int> expected_result{5,6,1,2,3,4};
+  ArrayProblem arr;
+  auto vec{arr.RightCircularShift(6,2,input)};
+  CheckIntVecEquality(vec, expected_result);
 }

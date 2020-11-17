@@ -279,14 +279,103 @@ int ArrayProblem::InversePairs2(std::vector<int> &data) {
   std::function<void(std::vector<int> &arr, int from, int to)> merge_sort;
   merge_sort = [&](std::vector<int> &arr, int from, int to){
     if (from < to) {
-      auto mid{(from + to) >> 2};
+      auto mid{(from + to) /2};
       merge_sort(arr, from, mid);
       merge_sort(arr,mid + 1, to);
-      int i{mid}, j{to};
+      int i{mid}, j{to}, it{to};
       while (i >= from && j >= mid + 1) {
-
+          if (arr.at(i) > arr.at(j)) {
+            result += (j - mid);
+            sorted_vec[it--] = arr.at(i--);
+          } else {
+            sorted_vec[it--] = arr.at(j--);
+          }
       }
-
+      while (i >= from) {
+        sorted_vec[it--] = arr.at(i--);
+      }
+      while (j >= mid + 1) {
+        sorted_vec[it--] = arr.at(j--);
+      }
+      for (int k{from}; k <= to; ++k) {
+        arr[k] = sorted_vec[k];
+      }
     }
   };
+  merge_sort(data,0, data.size()-1);
+  return result;
+}
+
+int ArrayProblem::FindLostNum(int* a, int aLen) {
+  int sum{0};
+  int whole{(1 + aLen) * aLen / 2};
+  for(int i{0}; i < aLen; ++ i) {
+     sum += a[i];
+  }
+  return whole - sum;
+}
+
+int ArrayProblem::FindLostNum2(int* a, int aLen) {
+  int ele{aLen};  // Here is aLen
+  for(int i{0}; i < aLen; ++ i) {
+    ele ^= i;
+    ele ^= a[i];
+  }
+  return ele;
+}
+
+std::vector<int> ArrayProblem::RightCircularShift(int n, int m, std::vector<int>& a) {
+  m = m % n;
+  for (int i{0}; i < m; ++i) {
+    int cur_idx = i;
+    int tmp = a.at(i);
+    int data_idx = (cur_idx - m + n) % n;
+    while (data_idx != i) {
+      a[cur_idx] = a[data_idx];
+      cur_idx = data_idx;
+      data_idx = (cur_idx - m + n) % n;
+    }
+    a[cur_idx] = tmp;
+    if (n % m != 0) {
+      break;
+    }
+  }
+  return a;
+}
+
+void ArrayProblem::reOrderArray(std::vector<int> &array) {
+  for (int i{1}; i < array.size(); ++i) {
+    if (array.at(i) % 2 == 1) {
+      int tmp = array.at(i);
+      int j = i-1;
+      while (j >= 0 && array.at(j) % 2 == 0) {
+        array[j+1] = array[j];
+        --j;
+      }
+      array[j+1] = tmp;
+    }
+  }
+}
+
+std::vector<std::vector<int> >
+MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b) {
+  int row1 = a.size(), row2 = b.size();
+  if (row1 && row2) {
+    int col1 = a.at(0).size();
+    int col2 = b.at(0).size();
+    if (col1 && col2 && col1 == row2) {
+      std::vector<std::vector<int>> result(row1, std::vector<int>(col2,0));
+      for (int i{0}; i < row1; ++i) {
+        for(int j{0}; j < col2; ++j) {
+          for (int k{0}; k < col1; ++k) {
+            result[i][j] += (a[i][k] * b[k][j]);
+          }
+        }
+      }
+      return result;
+    }
+  }
+  std::vector<std::vector<int>> result1;
+  std::cout << "Input error" << std::endl;
+  return result1;
 }

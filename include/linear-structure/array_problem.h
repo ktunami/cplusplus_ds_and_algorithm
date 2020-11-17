@@ -97,5 +97,34 @@ public:
   ///@return Number of inverse pairs
   int InversePairs2(std::vector<int> &data);
 
+  ///@brief Find lost num (Nowcoder 101)
+  ///@param a : Array
+  ///@param aLen : Array length
+  ///@return The lost num
+  int FindLostNum(int* a, int aLen) ;
+
+  ///@brief Find lost num (Nowcoder 101) use bit vec
+  ///@param a : Array
+  ///@param aLen : Array length
+  ///@return The lost num
+  int FindLostNum2(int* a, int aLen) ;
+
+  ///@brief Right circular shift (Nowcoder 110)
+  ///@param n ： Array length
+  ///@param m : Shift times
+  ///@param a : Input array
+  ///@return Array after shift
+  std::vector<int> RightCircularShift(int n, int m, std::vector<int>& a);
+
+  ///@brief Resort array (Nowcoder 77)
+  ///@param array : Input array
+  void reOrderArray(std::vector<int> &array);
+
+  ///@brief Matrix multiplication
+  ///@param a : The first matrix
+  ///@param b : The second matrix
+  ///@return a * b
+  std::vector<std::vector<int> >
+      MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b);
 }; //ArrayProblem
 #endif//C_PRACTICE_ARRAY_PROBLEM_H
