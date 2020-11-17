@@ -179,3 +179,10 @@ TEST(ArrayProblem, RightCircularShift) {
   auto vec{arr.RightCircularShift(6,2,input)};
   CheckIntVecEquality(vec, expected_result);
 }
+
+TEST(ArrayProblem, maxWater) {
+  std::vector<int> input{3,1,2,5,2,4};
+  ArrayProblem arr;
+  int expected_result{5};
+  ASSERT_EQ(expected_result,arr.maxWater(input));
+}

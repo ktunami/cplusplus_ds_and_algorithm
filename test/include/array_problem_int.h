@@ -120,12 +120,17 @@ public:
   ///@param array : Input array
   void reOrderArray(std::vector<int> &array);
 
-  ///@brief Matrix multiplication
+  ///@brief Matrix multiplication  (Nowcoder 143)
   ///@param a : The first matrix
   ///@param b : The second matrix
   ///@return a * b
   std::vector<std::vector<int> >
   MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b);
+
+  ///@brief Count number ob water  (Nowcoder 128)
+  ///@brief Input vector
+  ///@brief Max water
+  long long maxWater(std::vector<int>& arr);
 }; //ArrayProblem
 
 #endif//C_PRACTICE_ARRAY_PROBLEM_INT_H

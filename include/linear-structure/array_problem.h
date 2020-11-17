@@ -126,5 +126,10 @@ public:
   ///@return a * b
   std::vector<std::vector<int> >
       MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b);
+
+  ///@brief Count number ob water  (Nowcoder 128)
+  ///@brief Input vector
+  ///@brief Max water
+  long long maxWater(std::vector<int>& arr);
 }; //ArrayProblem
 #endif//C_PRACTICE_ARRAY_PROBLEM_H

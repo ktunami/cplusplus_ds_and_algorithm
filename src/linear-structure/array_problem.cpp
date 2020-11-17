@@ -358,7 +358,7 @@ void ArrayProblem::reOrderArray(std::vector<int> &array) {
 }
 
 std::vector<std::vector<int> >
-MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b) {
+ArrayProblem::MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b) {
   int row1 = a.size(), row2 = b.size();
   if (row1 && row2) {
     int col1 = a.at(0).size();
@@ -378,4 +378,32 @@ MatMal(std::vector<std::vector<int> >& a, std::vector<std::vector<int> >& b) {
   std::vector<std::vector<int>> result1;
   std::cout << "Input error" << std::endl;
   return result1;
+}
+
+long long ArrayProblem::maxWater(std::vector<int>& arr) {
+  int len = arr.size();
+  std::vector<int> left_max(len,0);
+  std::vector<int> right_max(len,0);
+  for (int i{0}; i < len; ++i) {
+    if (0 == i) {
+      left_max[i] = arr[i];
+    } else {
+      left_max[i] = left_max[i - 1] > arr[i] ? left_max[i - 1] : arr[i];
+    }
+  }
+  for (int i{len - 1}; i >= 0; --i) {
+    if ((len - 1) == i) {
+      right_max[i] = arr[i];
+    } else {
+      right_max[i] = right_max[i + 1] > arr[i] ? right_max[i + 1] : arr[i];
+    }
+  }
+  long long result{0};
+  for (int i{0}; i < len; ++i) {
+    int min_ele = left_max[i] < right_max[i] ? left_max[i] : right_max[i];
+    if ((min_ele - arr[i]) > 0) {
+      result += min_ele - arr[i];
+    }
+  }
+  return result;
 }
