@@ -1,5 +1,5 @@
 aux_source_directory(. SRC)
-aux_source_directory(bitwise-operation SRC_BITWISE_OPERATION)
+aux_source_directory(others SRC_OTHERS)
 aux_source_directory(divide-conquer SRC_DIVIDED_CONQUER)
 aux_source_directory(dynamic-programming SRC_DYNAMIC_PROGRAMMING)
 aux_source_directory(greedy SRC_GREEDY)
@@ -13,7 +13,7 @@ set(LIBRARY_OUTPUT_PATH  ${PROJECT_BINARY_DIR}/lib)
 
 add_executable(c_prac
         ${SRC}
-        ${SRC_BITWISE_OPERATION}
+        ${SRC_OTHERS}
         ${SRC_DIVIDED_CONQUER}
         ${SRC_DYNAMIC_PROGRAMMING}
         ${SRC_GREEDY}
@@ -25,7 +25,7 @@ add_executable(c_prac
 
 add_library(prac SHARED
         ${SRC}
-        ${SRC_BITWISE_OPERATION}
+        ${SRC_OTHERS}
         ${SRC_DIVIDED_CONQUER}
         ${SRC_DYNAMIC_PROGRAMMING}
         ${SRC_GREEDY}
@@ -36,7 +36,7 @@ add_library(prac SHARED
 
 add_library(prac_static STATIC
         ${SRC}
-        ${SRC_BITWISE_OPERATION}
+        ${SRC_OTHERS}
         ${SRC_DIVIDED_CONQUER}
         ${SRC_DYNAMIC_PROGRAMMING}
         ${SRC_GREEDY}

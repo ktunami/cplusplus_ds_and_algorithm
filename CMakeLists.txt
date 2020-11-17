@@ -4,7 +4,7 @@ add_definitions("-Wall -g")
 set(CMAKE_CXX_STANDARD 14)
 
 include_directories(
-        ${PROJECT_SOURCE_DIR}/include/bitwise-operation
+        ${PROJECT_SOURCE_DIR}/include/others
         ${PROJECT_SOURCE_DIR}/include/dynamic-programming
         ${PROJECT_SOURCE_DIR}/include/greedy
         ${PROJECT_SOURCE_DIR}/include/linear-structure
