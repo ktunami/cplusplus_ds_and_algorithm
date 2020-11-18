@@ -9,6 +9,7 @@
 #include <gtest/gtest.h>
 
 #include "bitwise_operation_int.h"
+#include "common_test_method.h"
 
 TEST(BitOp, ExchangeTwoIntegers) {
   int a = 3, b = 5;
@@ -33,3 +34,19 @@ TEST(BitOp, basic_operations) {
   ASSERT_EQ(2, BitOp::CountOnes(b));
 }
 
+
+TEST(BitOp, countBits) {
+  int num = 9;
+  auto vec{BitOp::countBits(num)};
+  std::vector<int> re{0,1,1,2,1,2,2,3,1,2};
+  CheckIntVecEquality(re, vec);
+}
+
+TEST(BitOp, rangeBitwiseAnd) {
+  ASSERT_EQ(4,BitOp::rangeBitwiseAnd(5,7));
+  ASSERT_EQ(0,BitOp::rangeBitwiseAnd(0,1));
+}
+
+TEST(BitOp, subsets) {
+  
+}

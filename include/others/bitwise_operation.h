@@ -9,6 +9,8 @@
 #ifndef C_PRACTICE_BITWISE_OPERATION_H
 #define C_PRACTICE_BITWISE_OPERATION_H
 
+#include <vector>
+
 class BitOp {
 public:
   ///@brief Exchange two integers
@@ -48,6 +50,27 @@ public:
   ///@param a : Input bit vector
   ///@return Number of 1s
   static int CountOnes(int a);
+
+  ///@brief Count bits number in [0 ~ num] (leetcode 338)
+  ///@param num : Input number
+  ///@return array of bits
+  static std::vector<int> countBits(int num);
+
+  ///@brief Count bits number in [0 ~ num] (leetcode 338)
+  ///@param num : Input number
+  ///@return array of bits
+  static std::vector<int> countBits1(int num);
+
+  ///@brief Bitwise AND of Numbers Range (leetcode 201)
+  ///@param m : Small number
+  ///@param n : Large number
+  ///@return The "and" result
+  static int rangeBitwiseAnd(int m, int n);
+
+  ///@brief Find all subsets (leetcode 08.04)
+  ///@param nums : input set
+  ///@return All subsets
+  static std::vector<std::vector<int>> subsets(std::vector<int>& nums);
 };
 
 #endif//C_PRACTICE_BITWISE_OPERATION_H

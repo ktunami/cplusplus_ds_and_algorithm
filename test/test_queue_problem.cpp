@@ -7,8 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include "queue_problem_int.h"
 #include "common_test_method.h"
+#include "queue_problem_int.h"
 
 
 TEST(QueueProblem, maxSlidingWindow) {

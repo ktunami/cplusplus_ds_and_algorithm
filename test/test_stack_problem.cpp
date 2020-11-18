@@ -7,8 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include "stack_problem_int.h"
 #include "common_test_method.h"
+#include "stack_problem_int.h"
 
 
 TEST(StackProblem, constructMaximumBinaryTree) {

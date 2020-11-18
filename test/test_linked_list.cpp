@@ -10,8 +10,8 @@
 #include <iostream>
 #include <memory>
 
-#include "linked_list_int.h"
 #include "common_test_method.h"
+#include "linked_list_int.h"
 
 TEST(TestLinkedList, CreatByTailInsert) {
   std::vector<int> input_vec{1,2,3,4,5};
