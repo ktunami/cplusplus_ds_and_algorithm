@@ -64,3 +64,8 @@ TEST(BitOp, subsets) {
     ++count;
   }
 }
+
+TEST(BitOp, totalHammingDistance) {
+  std::vector<int> vec{4, 14, 2};
+  ASSERT_EQ(6,BitOp::totalHammingDistance(vec));
+}

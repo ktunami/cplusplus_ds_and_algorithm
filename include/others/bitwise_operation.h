@@ -71,6 +71,8 @@ public:
   ///@param nums : input set
   ///@return All subsets
   static std::vector<std::vector<int>> subsets(std::vector<int>& nums);
+
+  static int totalHammingDistance(std::vector<int>& nums);
 };
 
 #endif//C_PRACTICE_BITWISE_OPERATION_H

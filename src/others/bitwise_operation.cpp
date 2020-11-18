@@ -8,6 +8,7 @@
 #include "bitwise_operation.h"
 
 #include <iostream>
+#include <cmath>
 
 void BitOp::ExchangeTwoIntegers(int &a, int &b) {
   a ^= b;
@@ -140,3 +141,21 @@ std::vector<std::vector<int>> BitOp::subsets(std::vector<int>& nums) {
   return result;
 }
 
+int BitOp::totalHammingDistance(std::vector<int>& nums) {
+  std::vector<int> vec(32,0);
+  if (nums.size() <= 1) {
+    return 0;
+  }
+  for(auto num : nums) {
+    int i{0};
+    while(num) {
+      vec[i++] += (num & 1);
+      num >>= 1;
+    }
+  }
+  int total{0}, all_len = nums.size();
+  for (auto ele : vec) {
+    total += ele * (all_len - ele);
+  }
+  return total;
+}
