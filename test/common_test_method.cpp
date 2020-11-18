@@ -24,3 +24,14 @@ void PrintVector(std::vector<int> &vec) {
   std::cout << std::endl;
   ++j;
 }
+
+long long RSHashForVector(std::vector<int> const& vec) {
+  long long b  = 378551;
+  long long a  = 63689;
+  long long hash = 0;
+  for(int i = 0; i < vec.size(); i++) {
+    hash = hash * a + vec.at(i);
+    a  = a * b;
+  }
+  return hash;
+}

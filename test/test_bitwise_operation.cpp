@@ -7,6 +7,7 @@
 
 
 #include <gtest/gtest.h>
+#include <unordered_set>
 
 #include "bitwise_operation_int.h"
 #include "common_test_method.h"
@@ -48,5 +49,18 @@ TEST(BitOp, rangeBitwiseAnd) {
 }
 
 TEST(BitOp, subsets) {
-  
+  std::vector<int> input_vec{1,2,3};
+  auto result{BitOp::subsets(input_vec)};
+  std::vector<std::vector<int>> expected_result{{},
+    {1},{2},{1,2},{3},{1,3},{2,3},{1,2,3}};
+  std::unordered_set<long long> expected_result_set;
+  for (auto const& vec : expected_result) {
+    expected_result_set.insert(RSHashForVector(vec));
+  }
+  int count{0};
+  for (auto const& vec : result) {
+    auto n{RSHashForVector(vec)};
+    ASSERT_TRUE(expected_result_set.find(n) != expected_result_set.end());
+    ++count;
+  }
 }

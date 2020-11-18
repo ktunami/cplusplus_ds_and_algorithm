@@ -139,3 +139,4 @@ std::vector<std::vector<int>> BitOp::subsets(std::vector<int>& nums) {
   }
   return result;
 }
+

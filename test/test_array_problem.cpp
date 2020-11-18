@@ -131,7 +131,6 @@ TEST(ArrayProblem, findMedianSortedArrays) {
   ASSERT_EQ(num, 2.00);
 }
 
-
 TEST(ArrayProblem, minNumberdisappered) {
   std::vector<int> nums{1,3};
   int result{2};
@@ -139,7 +138,6 @@ TEST(ArrayProblem, minNumberdisappered) {
   double num = arr.minNumberdisappered(nums);
   ASSERT_EQ(num,result);
 }
-
 
 TEST(ArrayProblem, MergeIntevals) {
   std::vector<Interval> input{

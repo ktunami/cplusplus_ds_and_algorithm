@@ -21,4 +21,9 @@ void CheckIntVecEquality(std::vector<int> &vec1, std::vector<int> &vec2);
 ///@param vec : Input vector
 void PrintVector(std::vector<int> &vec);
 
+///@brief Compute hash code of a vector
+///@param vec : Input vector
+///@return Hash code
+long long RSHashForVector(std::vector<int> const& vec);
+
 #endif//C_PRACTICE_COMMON_TEST_METHOD_H
