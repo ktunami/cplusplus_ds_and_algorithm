@@ -69,3 +69,12 @@ TEST(BitOp, totalHammingDistance) {
   std::vector<int> vec{4, 14, 2};
   ASSERT_EQ(6,BitOp::totalHammingDistance(vec));
 }
+
+TEST(ArrayProblem, reverseBits) {
+  ASSERT_EQ(0b00111001011110000010100101000000,BitOp::reverseBits(0b00000010100101000001111010011100));
+}
+
+TEST(ArrayProblem, singleNumber) {
+  std::vector<int> input{0,1,0,6,1,1,0};
+  ASSERT_EQ(BitOp::singleNumber(input),6);
+}

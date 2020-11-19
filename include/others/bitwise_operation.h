@@ -1,6 +1,7 @@
 /***************************************************
 * File:   bitwise_operation.h
 * Brief:  Bitwise operation
+ * https://blog.csdn.net/qq_41318400/article/details/107724948
 * Author: kate
 * Update: 2020/11/17.
 ***************************************************/
@@ -72,7 +73,21 @@ public:
   ///@return All subsets
   static std::vector<std::vector<int>> subsets(std::vector<int>& nums);
 
+  ///@brief Compute hamming distance between any two numbers in nums (leetcode 477)
+  ///@param nums : Input vector
+  ///@return Total distance
   static int totalHammingDistance(std::vector<int>& nums);
+
+  ///@brief Find the number that only appears once
+  ///  all other numbers appear 3times (leetcode 137)
+  ///@param nums : Input vector
+  ///@return The single number
+  static int singleNumber(std::vector<int>& nums);
+
+  ///@brief Reverse bit pattern
+  ///@param a : Input num
+  ///@return Reversed number
+  static std::uint32_t reverseBits(std::uint32_t a);
 };
 
 #endif//C_PRACTICE_BITWISE_OPERATION_H

@@ -184,3 +184,4 @@ TEST(ArrayProblem, maxWater) {
   int expected_result{5};
   ASSERT_EQ(expected_result,arr.maxWater(input));
 }
+
