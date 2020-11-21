@@ -94,6 +94,9 @@
                for(int k=i*2+1;k<length;k=k*2+1)
                   如果子节点大于父节点，将子节点值赋给父节点（父节点是temp）
                arr[i] = temp;
+          >>> 优先队列
+          #include <queue>  //默认是less，大顶堆
+          std::priority_queue<int, std::vector<int>, std::greater<int> > q; //小顶堆
 
   线性时间排序：
        【算法描述】
