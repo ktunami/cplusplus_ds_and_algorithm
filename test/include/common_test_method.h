@@ -15,11 +15,20 @@
 ///@brief Check if two integral vectors are equal
 ///@param vec1 : vector 1
 ///@param vec2 : vector 2
-void CheckIntVecEquality(std::vector<int> &vec1, std::vector<int> &vec2);
+void CheckIntVecEquality(std::vector<int> const& vec1, std::vector<int> const& vec2);
+
+///@brief Check if two 2D integral vectors are equal
+///@param vec1 : vector 1
+///@param vec2 : vector 2
+void Check2DIntVecEquality(std::vector<std::vector<int>> const& vec1, std::vector<std::vector<int>> const& vec2);
 
 ///@brief Print integral vector
 ///@param vec : Input vector
-void PrintVector(std::vector<int> &vec);
+void PrintVector(std::vector<int> const& vec);
+
+///@brief Print 2D integral vector
+///@param vec : Input vector
+void Print2DVector(std::vector<std::vector<int>> const& vec);
 
 ///@brief Compute hash code of a vector
 ///@param vec : Input vector

@@ -8,14 +8,21 @@
 #include "common_test_method.h"
 #include <gtest/gtest.h>
 
-void CheckIntVecEquality(std::vector<int> &vec1, std::vector<int> &vec2) {
+void CheckIntVecEquality(std::vector<int> const& vec1, std::vector<int> const& vec2) {
   ASSERT_EQ(vec1.size(), vec2.size());
   for (int i{0}; i < vec1.size(); ++i) {
     ASSERT_EQ(vec1.at(i), vec2.at(i));
   }
 }
 
-void PrintVector(std::vector<int> &vec) {
+void Check2DIntVecEquality(std::vector<std::vector<int>> const& vec1, std::vector<std::vector<int>> const& vec2) {
+  ASSERT_EQ(vec1.size(), vec2.size());
+  for (int i{0}; i < vec1.size(); ++i) {
+    CheckIntVecEquality(vec1.at(i), vec2.at(i));
+  }
+}
+
+void PrintVector(std::vector<int> const & vec) {
   static int j = 1;
   std::cout << "group : " << j << std::endl;
   for (int i{0}; i < vec.size(); ++i) {
@@ -23,6 +30,14 @@ void PrintVector(std::vector<int> &vec) {
   }
   std::cout << std::endl;
   ++j;
+}
+
+void Print2DVector(std::vector<std::vector<int>> const& vec) {
+  std::cout << "Begin to print the 2D vector is: " << std::endl;
+  for (int i{0}; i < vec.size(); ++i) {
+    PrintVector(vec.at(i));
+  }
+  std::cout << "2D vector print over " << std::endl;
 }
 
 long long RSHashForVector(std::vector<int> const& vec) {
