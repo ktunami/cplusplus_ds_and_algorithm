@@ -35,4 +35,13 @@ void Print2DVector(std::vector<std::vector<int>> const& vec);
 ///@return Hash code
 long long RSHashForVector(std::vector<int> const& vec);
 
+///@brief Check if two 2D vectors contains the same members
+///@param vec1 : Vector 1
+///@param vec2 : Vector 2
+///@param need_sort : If true, means to sort subarray first
+void Check2DSameMembers(
+    std::vector<std::vector<int>> & vec1,
+    std::vector<std::vector<int>> & vec2,
+    bool need_sort);
+
 #endif//C_PRACTICE_COMMON_TEST_METHOD_H

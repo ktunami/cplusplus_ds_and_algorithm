@@ -53,16 +53,7 @@ TEST(BitOp, subsets) {
   auto result{BitOp::subsets(input_vec)};
   std::vector<std::vector<int>> expected_result{{},
     {1},{2},{1,2},{3},{1,3},{2,3},{1,2,3}};
-  std::unordered_set<long long> expected_result_set;
-  for (auto const& vec : expected_result) {
-    expected_result_set.insert(RSHashForVector(vec));
-  }
-  int count{0};
-  for (auto const& vec : result) {
-    auto n{RSHashForVector(vec)};
-    ASSERT_TRUE(expected_result_set.find(n) != expected_result_set.end());
-    ++count;
-  }
+  Check2DSameMembers(expected_result, result, true);
 }
 
 TEST(BitOp, totalHammingDistance) {

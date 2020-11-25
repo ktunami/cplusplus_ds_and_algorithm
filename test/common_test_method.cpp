@@ -5,8 +5,10 @@
 * Update: 2020/11/14.
 ***************************************************/
 
-#include "common_test_method.h"
 #include <gtest/gtest.h>
+#include <unordered_set>
+
+#include "common_test_method.h"
 
 void CheckIntVecEquality(std::vector<int> const& vec1, std::vector<int> const& vec2) {
   ASSERT_EQ(vec1.size(), vec2.size());
@@ -49,4 +51,22 @@ long long RSHashForVector(std::vector<int> const& vec) {
     a  = a * b;
   }
   return hash;
+}
+
+void Check2DSameMembers(
+    std::vector<std::vector<int>> & vec1,
+    std::vector<std::vector<int>> & vec2,
+    bool need_sort) {
+  ASSERT_EQ(vec1.size(), vec2.size());
+  std::unordered_set<long long> st;
+  for (int i{0}; i < vec1.size(); ++i) {
+    if (need_sort) {
+      std::sort(vec1.at(i).begin(), vec1.at(i).end());
+      std::sort(vec2.at(i).begin(), vec2.at(i).end());
+    }
+    st.insert(RSHashForVector(vec1.at(i)));
+  }
+  for (int i{0}; i < vec1.size(); ++i) {
+    ASSERT_FALSE(st.find(RSHashForVector(vec2.at(i))) == st.end());
+  }
 }

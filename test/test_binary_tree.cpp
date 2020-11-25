@@ -60,3 +60,11 @@ TEST(BinaryTree, sumNumbers) {
   ASSERT_EQ(193 + 195 + 12,BinaryTree::sumNumbers2(biTree2));
 }
 
+TEST(BinaryTree, pathSum) {
+  std::vector<int> input{5,4,8,1,11,0,9,0,0,2,7};
+  auto biTr{BinaryTree::CreateFromArray(input)};
+  std::vector<std::vector<int>> expected_result{{5,8,9},{5,4,11,2}};
+  auto result{BinaryTree::pathSum(biTr, 22)};
+  Check2DSameMembers(expected_result, result, false);
+}
+

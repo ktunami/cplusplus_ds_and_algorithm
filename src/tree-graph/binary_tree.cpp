@@ -315,3 +315,50 @@ int BinaryTree::sumNumbers2(BTNode* root){
   pre_order_traversal(root, 0);
   return sum;
 }
+
+
+bool BinaryTree::IsBalanced_Solution(BTNode* pRoot) {
+  std::function<int(BTNode *)> get_depth;
+  bool result{true};
+  get_depth = [&] (BTNode * r) {
+    if (result) {
+      if (r) {
+        int left_height = get_depth(r->left);
+        int right_height = get_depth(r->right);
+        int diff = left_height- right_height;
+        if (diff >= 2 || diff <= -2) {
+          result = false;
+        }
+        return 1 + std::max(left_height, right_height);
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  };
+  get_depth(pRoot);
+  return result;
+}
+
+std::vector<std::vector<int> > BinaryTree::pathSum(BTNode* root, int sum) {
+  std::vector<std::vector<int> > result;
+  std::vector<int> vec1;
+  std::function<void(BTNode* rt, std::vector<int> path, int sm)> get_path;
+  get_path = [&](BTNode* rt, std::vector<int> path, int sm) {
+    if (rt) {
+      path.push_back(rt->val);
+      if (!rt->left && !rt->right && (sm+rt->val) == sum) {
+        result.push_back(path);
+      }
+      if (rt->left) {
+        get_path(rt->left, path, sm+rt->val);
+      }
+      if (rt->right) {
+        get_path(rt->right, path, sm+rt->val);
+      }
+    }
+  };
+  get_path(root, vec1, 0);
+  return result;
+}

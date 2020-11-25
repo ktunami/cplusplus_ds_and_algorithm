@@ -123,6 +123,17 @@ public:
   /// @brief Get the sum of number formed from all root to leaves (Nowcoder 5)
   /// pre-order traversal method
   static int sumNumbers2(BTNode* root);
+
+  /// @brief Check if the tree is balanced
+  /// @param pRoot : Root of tree
+  /// @return if balanced, return true
+  static bool IsBalanced_Solution(BTNode* pRoot);
+
+  /// @brief Get path from root to leaves whose values sum up to a given value
+  /// @param root : Binary tree
+  /// @param sum : The given value;
+  static std::vector<std::vector<int> > pathSum(BTNode* root, int sum);
+
 };
 
 #endif//C_PRACTICE_BINARY_TREE_H

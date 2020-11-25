@@ -94,6 +94,16 @@ public:
   /// pre-order traversal method
   static int sumNumbers2(BTNode* root);
 
+  /// @brief Check if the tree is balanced
+  /// @param pRoot : Root of tree
+  /// @return if balanced, return true
+  static bool IsBalanced_Solution(BTNode* pRoot);
+
+  /// @brief Get path from root to leaves whose values sum up to a given value
+  /// @param root : Binary tree
+  /// @param sum : The given value;
+  static std::vector<std::vector<int> > pathSum(BTNode* root, int sum);
+
 private:
   /// @brief In-order traversal
   /// @param rt : Root of the binary tree
