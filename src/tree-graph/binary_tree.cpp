@@ -184,3 +184,134 @@ BTNode * BinaryTree::creat_frm_preorder_inorder(
     return root;
   }
 }
+
+std::vector<int> BinaryTree::GetRightSightView(std::vector<int>& xianxu, std::vector<int>& zhongxu) {
+  auto root{creat_frm_preorder_inorder(xianxu, zhongxu, 0, zhongxu.size()-1, 0, zhongxu.size()-1)};
+  std::queue<BTNode *> qu;
+  std::vector<int> result;
+  if (root) {
+    qu.push(root);
+    while(!qu.empty()) {
+      int qu_size = qu.size();
+      for(int i{0}; i < qu_size; ++i) {
+        auto cur{qu.front()};
+        qu.pop();
+        if (cur->left) {
+          qu.push(cur->left);
+        }
+        if (cur->right) {
+          qu.push(cur->right);
+        }
+        if (i == (qu_size-1)) {
+          result.push_back(cur->val);
+        }
+      }
+    }
+  }
+  return result;
+}
+
+void BinaryTree::Mirror(BTNode *pRoot) {
+  if (pRoot) {
+    auto tmp{pRoot->left};
+    pRoot->left = pRoot->right;
+    pRoot->right = tmp;
+    Mirror(pRoot->left);
+    Mirror(pRoot->right);
+  }
+}
+
+int BinaryTree::maxDepth(BTNode* root) {
+  if (root) {
+    return std::max(maxDepth(root->left), maxDepth(root->right)) + 1;
+  } else {
+    return 0;
+  }
+}
+
+int BinaryTree::maxPathSum(BTNode* root) {
+  int val{INT_MIN};
+  std::function<int(BTNode* )> get_max_path_val;
+  get_max_path_val = [&](BTNode * r) {
+    if (r) {
+      int left_max = std::max(0, get_max_path_val(r->left));
+      int right_max = std::max(0, get_max_path_val(r->right));
+      val = std::max(val, left_max + right_max + r->val);
+      return std::max(left_max, right_max) + r->val;
+    } else {
+      return 0;
+    }
+  };
+  get_max_path_val(root);
+  return val;
+}
+
+BTNode* BinaryTree::KthNode(BTNode* pRoot, int k) {
+  BTNode * result{nullptr};
+  int num = 0;
+  std::function<void(BTNode* )> find_kth;
+  find_kth = [&](BTNode* r){
+    if (r) {
+      if (num < k) {
+        find_kth(r->left);
+      }
+      ++num;
+      if (num == k) {
+        result = r;
+      }
+      if (num < k) {
+        find_kth(r->right);
+      }
+    }
+    return 0;
+  };
+  find_kth(pRoot);
+  return result;
+}
+
+int BinaryTree::sumNumbers(BTNode* root) {
+  int sum{0};
+  std::queue<BTNode *> qu;
+  if (root) {
+    qu.push(root);
+    while(!qu.empty()) {
+      int qu_len = qu.size();
+      for (int i{0}; i < qu_len; ++i) {
+        auto cur{qu.front()};
+        qu.pop();
+        if (!cur->right && !cur->left) {
+          sum += cur->val;
+        }
+        if(cur->left) {
+          cur->left->val += 10 * cur->val;
+          qu.push(cur->left);
+        }
+        if(cur->right) {
+          cur->right->val += 10 * cur->val;
+          qu.push(cur->right);
+        }
+      }
+    }
+  }
+  return sum;
+}
+
+int BinaryTree::sumNumbers2(BTNode* root){
+  int sum{0};
+  std::function<void(BTNode *, int)> pre_order_traversal;
+  pre_order_traversal = [&](BTNode * rt, int rt_num) {
+    if (rt) {
+      if (!rt->left && !rt->right) {
+        sum += (rt_num * 10 + rt->val);
+      }
+      if (rt->left) {
+        pre_order_traversal(rt->left, rt_num * 10 + rt->val);
+      }
+      if (rt->right) {
+        pre_order_traversal(rt->right, rt_num * 10 + rt->val);
+      }
+    }
+  };
+  pre_order_traversal(root, 0);
+  return sum;
+}

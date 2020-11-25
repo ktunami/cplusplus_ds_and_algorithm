@@ -69,6 +69,31 @@ public:
   /// @return Right sight view of the binary tree
   static std::vector<int> GetRightSightView(std::vector<int>& xianxu, std::vector<int>& zhongxu);
 
+  /// @brief Get mirror of a binary tree (Nowcoder 72)
+  /// @param pRoot : Input tree
+  static void Mirror(BTNode *pRoot);
+
+  /// @brief Get max depth of a binary tree (Nowcoder 13)
+  /// @param root : Input tree
+  static int maxDepth(BTNode* root);
+
+  /// @brief Find the maximum path sum (Leetcode 124)
+  static int maxPathSum(BTNode* root);
+
+  /// @brief Find the kth node in a binary search tree (Nowcoder 81)
+  /// @param pRoot : Root of the tree
+  /// @param k : the kth number
+  /// @return The pointer of the kth number
+  static BTNode* KthNode(BTNode* pRoot, int k);
+
+  /// @brief Get the sum of number formed from all root to leaves (Nowcoder 5)
+  /// level traversal method
+  static int sumNumbers(BTNode* root);
+
+  /// @brief Get the sum of number formed from all root to leaves (Nowcoder 5)
+  /// pre-order traversal method
+  static int sumNumbers2(BTNode* root);
+
 private:
   /// @brief In-order traversal
   /// @param rt : Root of the binary tree

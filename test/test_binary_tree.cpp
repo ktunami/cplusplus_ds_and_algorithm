@@ -37,3 +37,26 @@ TEST(BinaryTree, creat_frm_preorder_inorder) {
   CheckIntVecEquality(pre_order, pre_order_traversal);
   CheckIntVecEquality(in_order, in_order_traversal);
 }
+
+TEST(BinaryTree, GetRightSightView) {
+  std::vector<int> pre_order{1,2,4,5,6,7,3,8,9};
+  std::vector<int> in_order{4,2,6,5,7,1,3,9,8};
+  std::vector<int> expected_result{1,3,8,9};
+  auto result{BinaryTree::GetRightSightView(pre_order, in_order)};
+  CheckIntVecEquality(result, expected_result);
+}
+
+TEST(BinaryTree, maxPathSum) {
+  std::vector<int> input{-10,9,20,0,0,15,7};
+  auto biTree{BinaryTree::CreateFromArray(input)};
+  ASSERT_EQ(42,BinaryTree::maxPathSum(biTree));
+}
+
+TEST(BinaryTree, sumNumbers) {
+  std::vector<int> input{1,9,2,3,5};
+  auto biTree1{BinaryTree::CreateFromArray(input)};
+  auto biTree2{BinaryTree::CreateFromArray(input)};
+  ASSERT_EQ(193 + 195 + 12,BinaryTree::sumNumbers(biTree1));
+  ASSERT_EQ(193 + 195 + 12,BinaryTree::sumNumbers2(biTree2));
+}
+

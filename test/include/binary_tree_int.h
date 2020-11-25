@@ -91,6 +91,38 @@ public:
   static BTNode * creat_frm_preorder_inorder(
     std::vector<int> &pre_order, std::vector<int> &in_order, int from1, int to1,
     int from2, int to2);
+
+  /// @brief Create binary tree from pre-order traversal and in-order traversal vector
+  /// then get the right sight view of the binary tree (Nowcoder 136)
+  /// @param xianxu : pre-order traversal vector;
+  /// @param zhongxu : in-order traversal vector;
+  /// @return Right sight view of the binary tree
+  static std::vector<int> GetRightSightView(std::vector<int>& xianxu, std::vector<int>& zhongxu);
+
+  /// @brief Get mirror of a binary tree (Nowcoder 72)
+  /// @param pRoot : Input tree
+  static void Mirror(BTNode *pRoot);
+
+  /// @brief Get max depth of a binary tree (Nowcoder 13)
+  /// @param root : Input tree
+  static int maxDepth(BTNode* root);
+
+  /// @brief Find the maximum path sum (Leetcode 124)
+  static int maxPathSum(BTNode* root);
+
+  /// @brief Find the kth node in a binary search tree (Nowcoder 81)
+  /// @param pRoot : Root of the tree
+  /// @param k : the kth number
+  /// @return The pointer of the kth number
+  static BTNode* KthNode(BTNode* pRoot, int k);
+
+  /// @brief Get the sum of number formed from all root to leaves (Nowcoder 5)
+  /// level traversal method
+  static int sumNumbers(BTNode* root);
+
+  /// @brief Get the sum of number formed from all root to leaves (Nowcoder 5)
+  /// pre-order traversal method
+  static int sumNumbers2(BTNode* root);
 };
 
 #endif//C_PRACTICE_BINARY_TREE_H
