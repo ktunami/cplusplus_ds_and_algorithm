@@ -94,15 +94,44 @@ public:
   /// pre-order traversal method
   static int sumNumbers2(BTNode* root);
 
-  /// @brief Check if the tree is balanced
+  /// @brief Check if the tree is balanced (Nowcoder 62)
   /// @param pRoot : Root of tree
   /// @return if balanced, return true
   static bool IsBalanced_Solution(BTNode* pRoot);
 
-  /// @brief Get path from root to leaves whose values sum up to a given value
+  /// @brief Get path from root to leaves whose values sum up to a given value (Nowcoder 8)
   /// @param root : Binary tree
   /// @param sum : The given value;
   static std::vector<std::vector<int> > pathSum(BTNode* root, int sum);
+
+  /// @brief Judge if a binary tree is a binary search tree and a complete binary tree (Nowcoder 60)
+  /// @param root : Binary tree
+  /// @return Judge result
+  static std::vector<bool> judgeIt(BTNode* root);
+
+  /// @brief Check if the tree is symmetric (剑指offer 28)
+  /// @param root : Input tree
+  /// @return True if the tree is symmetric
+  static bool isSymmetric(BTNode* root);
+
+  /// @brief Check if root1 contains root2
+  static bool isContains(BTNode* root1, BTNode* root2);
+
+  /// @brief Merge trees (Nowcoder 117)
+  /// @param t1 : Tree1
+  /// @param t2 : Tree2
+  /// @return Merged tree
+  static BTNode* mergeTrees(BTNode* t1, BTNode* t2);
+
+  /// @brief Compute number of tree nodes (Nowcoder 84)
+  /// @param head : Input tree
+  /// @return Number of tree node
+  static int CompleteTreeNodeNum(BTNode* head);
+
+  /// @brief Find errors in binary search tree (Nowcoder 58)
+  /// @param root : Input tree
+  /// @return The wrong values
+  static std::vector<int> findError(BTNode* root);
 
 private:
   /// @brief In-order traversal

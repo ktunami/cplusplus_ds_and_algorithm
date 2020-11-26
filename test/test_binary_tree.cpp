@@ -68,3 +68,31 @@ TEST(BinaryTree, pathSum) {
   Check2DSameMembers(expected_result, result, false);
 }
 
+TEST(BinaryTree, judgeIt) {
+  std::vector<int> input{2,1,3};
+  auto biTr{BinaryTree::CreateFromArray(input)};
+  auto result{BinaryTree::judgeIt(biTr)};
+  ASSERT_EQ(result.size(),2);
+  ASSERT_EQ(result.at(0), true);
+  ASSERT_EQ(result.at(1), true);
+}
+
+TEST(BinaryTree, isSymmetric) {
+  std::vector<int> input{1,2,2,2,0,2};
+  auto biTr{BinaryTree::CreateFromArray(input)};
+  BinaryTree::isSymmetric(biTr);
+}
+
+TEST(BinaryTree,isContains) {
+  std::vector<int> input1{1,2,3,4,5,6,7,0,8,9};
+  std::vector<int> input2{2,4,5,0,8,9};
+  auto biTr1{BinaryTree::CreateFromArray(input1)};
+  auto biTr2{BinaryTree::CreateFromArray(input2)};
+  ASSERT_TRUE(BinaryTree::isContains(biTr1, biTr2));
+}
+
+TEST(BinaryTree,CompleteTreeNodeNum) {
+  std::vector<int> input{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+  auto biTr{BinaryTree::CreateFromArray(input)};
+  ASSERT_EQ(19,BinaryTree::CompleteTreeNodeNum(biTr));
+}

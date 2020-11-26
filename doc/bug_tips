@@ -1,0 +1,17 @@
+遇到过的bug：
+
+BUG1 => Illegal Instruction 4
+   现象：某函数需要返回一个vector，但是忘记写return。于是发生这个错误
+   https://www.cnblogs.com/arnoldlu/p/10815908.html
+   tips: 留心编译期的各种warning
+
+BUG2 => 递归调用lambada表达式时，函数名写错
+   现象：编译没异常，程序能运行，但是结果异常。比如引用捕获函数中的变量时，无法对其进行修改
+
+BUG3 => queue访问元素时，忘记pop
+   tips: 访问队首元素后马上pop，以免忘记
+
+BUG4 => 变量名字搞错
+   tips：
+       1）不同变量间名字最好差异大一些。比如：numbers表示数组，number表示该数组中的元素，这样特别容易出错
+       2）变量名尽量起的有意义

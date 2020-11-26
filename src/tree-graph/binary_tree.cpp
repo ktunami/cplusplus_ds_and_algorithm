@@ -362,3 +362,171 @@ std::vector<std::vector<int> > BinaryTree::pathSum(BTNode* root, int sum) {
   get_path(root, vec1, 0);
   return result;
 }
+
+std::vector<bool> BinaryTree::judgeIt(BTNode* root) {
+  bool is_binary_search_tree{true}, is_balanced{true};
+  std::vector<bool> result;
+  int last_num{INT_MIN};
+  std::function<void(BTNode *, int &)> check_binary_search_tree;
+  check_binary_search_tree = [&](BTNode * rt, int & last) {
+    if (rt) {
+      check_binary_search_tree(rt->left, last);
+      if (rt->val > last) {
+        last = rt->val;
+      } else {
+        is_binary_search_tree = false;
+      }
+      check_binary_search_tree(rt->right, last);
+    }
+  };
+  std::function<int(BTNode *)> check_is_balanced;
+  check_is_balanced = [&](BTNode * rt) {
+    if (rt) {
+      int left = check_is_balanced(rt->left);
+      int right = check_is_balanced(rt->right);
+      int diff = left - right;
+      if (diff > 1 || diff < -1) {
+        is_balanced = false;
+      }
+      return std::max(left,right) + 1;
+    } else {
+      return 0;
+    }
+  };
+  check_binary_search_tree(root, last_num);
+  result.push_back(is_binary_search_tree);
+  check_is_balanced(root);
+  result.push_back(is_balanced);
+  return result;
+}
+
+void PrintVector(std::vector<int> const & vec) {
+  static int j = 1;
+  std::cout << "group : " << j << std::endl;
+  for (int i{0}; i < vec.size(); ++i) {
+    std::cout << vec.at(i) << "--";
+  }
+  std::cout << std::endl;
+  ++j;
+}
+
+bool BinaryTree::isSymmetric(BTNode* root) {
+  std::function<bool(BTNode *, BTNode *)> check_left_right_symmetric;
+  check_left_right_symmetric = [&](BTNode * left, BTNode * right) {
+    if (!left && !right) {
+      return true;
+    } else if (!left || !right || (left->val != right->val)) {
+      return false;
+    } else {
+      return check_left_right_symmetric(left->left, right->right) &&
+          check_left_right_symmetric(left->right, right->left);
+    }
+  };
+  return root ? check_left_right_symmetric(root->left, root->right) : true;
+}
+
+bool BinaryTree::isContains(BTNode* root1, BTNode* root2) {
+  BTNode * r1{nullptr};
+  std::function<void(BTNode *, BTNode *)> find_root;
+  find_root = [&](BTNode * rt, BTNode * point) {
+    if (rt) {
+      if (rt->val == point->val) {
+        r1 = rt;
+      } else {
+        find_root(rt->left, point);
+        find_root(rt->right, point);
+      }
+    }
+  };
+  std::function<bool(BTNode *, BTNode *)> check_equality;
+  check_equality = [&](BTNode * a1, BTNode * a2) {
+    if (!a1 && !a2) {
+      return true;
+    }else if (!a1 || !a2 || a1->val != a2->val) {
+      return false;
+    } else {
+      return check_equality(a1->left, a2->left) && check_equality(a1->right, a2->right);
+    }
+  };
+
+  if (!root2) {
+    return root1 ? false : true;
+  } else {
+    find_root(root1, root2);
+    return r1 ? check_equality(r1, root2) : false;
+  }
+}
+
+BTNode* BinaryTree::mergeTrees(BTNode* t1, BTNode* t2) {
+  if (!t1 && !t2) {
+    return nullptr;
+  }
+  if (!t1) {
+    return t2;
+  }
+  if (!t2) {
+    return t1;
+  }
+  t1->val += t2->val;
+  t1->left = mergeTrees(t1->left, t2->left);
+  t1->right = mergeTrees(t1->right, t2->right);
+  return t1;
+}
+
+int BinaryTree::CompleteTreeNodeNum(BTNode* head) {
+  if (head) {
+    BTNode * left{head->left};
+    BTNode * right{head->right};
+    int left_level{0}, right_level{0};
+    while (left) {
+      ++left_level;
+      left = left->left;
+    }
+    while (right) {
+      ++right_level;
+      right = right->right;
+    }
+    if (left_level == right_level) {
+      return (1 << (left_level + 1)) - 1;
+    } else {
+      return CompleteTreeNodeNum(head->left) + CompleteTreeNodeNum(head->right) + 1;
+    }
+  } else {
+    return 0;
+  }
+}
+
+std::vector<int> BinaryTree::findError(BTNode* root) {
+  bool find_first{true};
+  int pre{INT_MIN}, small{INT_MIN}, mid{INT_MIN}, large{INT_MIN};
+  std::function<void(BTNode *)> find_node_ptr;
+  find_node_ptr = [&](BTNode * rt) {
+    if (rt) {
+      find_node_ptr(rt->left);
+      if (rt->val >= pre) {
+        if ((!find_first) && (pre == INT_MIN)) {
+          large = rt->val;
+        }
+        pre = rt->val;
+      } else {
+        if (find_first) {
+          small = pre;
+          mid = rt->val;
+          pre = INT_MIN;
+          find_first = false;
+        } else {
+          large = rt->val;
+        }
+      }
+      find_node_ptr(rt->right);
+    }
+  };
+  find_node_ptr(root);
+  if (mid > large && mid < small) {
+    return std::vector<int>{large, small};
+  } else if (small < mid) {
+    return std::vector<int>{large, mid};
+  } else {
+    return std::vector<int>{mid, small};
+  }
+}
