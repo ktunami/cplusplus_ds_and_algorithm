@@ -5,13 +5,39 @@ BUG1 => Illegal Instruction 4
    https://www.cnblogs.com/arnoldlu/p/10815908.html
    tips: 留心编译期的各种warning
 
-BUG2 => 递归调用lambada表达式时，函数名写错
+
+BUG2 => 递归调用lambada表达式时，函数名误写为调用lambada表达式的函数的名字
    现象：编译没异常，程序能运行，但是结果异常。比如引用捕获函数中的变量时，无法对其进行修改
+
 
 BUG3 => queue访问元素时，忘记pop
    tips: 访问队首元素后马上pop，以免忘记
+
 
 BUG4 => 变量名字搞错
    tips：
        1）不同变量间名字最好差异大一些。比如：numbers表示数组，number表示该数组中的元素，这样特别容易出错
        2）变量名尽量起的有意义
+
+
+BUG5 => 递归函数的中止条件
+   tips:
+       任何时候必须check递归的终止条件，对于递归函数，这个终止条件是最外层的
+
+
+BUG6 => 对某段写法相似的函数复制粘贴时，一定要仔细check每一句。比如merge sort
+          while (i <= mid) {
+            tmp.push_back(vec[i++]);
+          }
+          while (j <= to) {  // 这块由上面复制过来，但是忘了把"<= mid"，改成" <= to"
+            tmp.push_back(vec[j++]);
+          }
+          如果思路没有问题，但是结果又不对的，要仔细检查每一个字！！
+
+
+BUG7 => HeapSort的bug
+         1.除以2是右移1位，但是脑子抽写成了右移2位
+         2.(详见basic_sort_algo.cpp) 如果vec[father] = tmp; 这句写在while里面，那么当child超出范围时，
+         这句就不会执行了。要特别注意边界的各种情况
+
+

@@ -13,7 +13,7 @@
 void CheckIntVecEquality(std::vector<int> const& vec1, std::vector<int> const& vec2) {
   ASSERT_EQ(vec1.size(), vec2.size());
   for (int i{0}; i < vec1.size(); ++i) {
-    ASSERT_EQ(vec1.at(i), vec2.at(i));
+    EXPECT_EQ(vec1.at(i), vec2.at(i));
   }
 }
 

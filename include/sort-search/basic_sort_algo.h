@@ -29,11 +29,6 @@ public:
 
   static void HeapSort(std::vector<int> & input);
 
-  static void CountingSort(std::vector<int> & input);
-
-  static void RadixSort(std::vector<int> & input);
-
-  static void BucketSort(std::vector<int> & input);
 };
 
 #endif//C_PRACTICE_BASIC_SORT_ALGO_H

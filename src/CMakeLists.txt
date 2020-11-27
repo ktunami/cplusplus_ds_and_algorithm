@@ -4,7 +4,7 @@ aux_source_directory(divide-conquer SRC_DIVIDED_CONQUER)
 aux_source_directory(dynamic-programming SRC_DYNAMIC_PROGRAMMING)
 aux_source_directory(greedy SRC_GREEDY)
 aux_source_directory(linear-structure SRC_LINEAR_STRUCTURE)
-aux_source_directory(sort_search SRC_SORT_SEARCH)
+aux_source_directory(sort-search SRC_SORT_SEARCH)
 aux_source_directory(string SRC_STRING)
 aux_source_directory(tree-graph SRC_TREE_GRAPH)
 
