@@ -32,13 +32,36 @@ public:
   /// @param input : Input array
   /// @param default_null_val : Null value
   /// @return Root of binary tree
-  static BTNode * CreateFromArray(std::vector<int> &input, int default_null_val = -100);
+  template<class T>
+  static T * CreateFromArray(std::vector<int> &input, int default_null_val = 0) {
+    T * root{nullptr};
+    int len = input.size();
+    if (len > 0) {
+      root = new T(input.at(0));
+      create_complete_binary_tree<T>(root, 0, input, default_null_val);
+    }
+    return root;
+  }
 
   /// @brief Traversal of a binary tree
   /// @param rt : Root of the binary tree
   /// @param vec : Traversal result
   /// @param type : Traversal type
-  static void Traversal(BTNode const * const rt, std::vector<int> &vec, TraversalType type);
+  template<class T>
+  static void Traversal(T const * const rt, std::vector<int> &vec, TraversalType type) {
+    vec.clear();
+    switch (type) {
+      case TraversalType::IN_ORDER :
+        in_order_traversal<T>(rt, vec);
+        break;
+      case TraversalType::POST_ORDER :
+        post_order_traversal<T>(rt, vec);
+        break;
+      case TraversalType::PRE_ORDER :
+        pre_order_traversal<T>(rt, vec);
+        break;
+    }
+  }
 
   /// @brief Level order traversal (Nowcoder 15)
   static std::vector<std::vector<int> > levelOrder(BTNode* root);
@@ -137,20 +160,58 @@ private:
   /// @brief In-order traversal
   /// @param rt : Root of the binary tree
   /// @param vec : Traversal result
-  static void in_order_traversal(BTNode const * const rt, std::vector<int> &vec);
+  template<class T>
+  static void in_order_traversal(T const * const rt, std::vector<int> &vec) {
+    if (nullptr != rt) {
+      in_order_traversal(rt->left, vec);
+      vec.push_back(rt->val);
+      in_order_traversal(rt->right, vec);
+    }
+  }
 
   /// @brief Pre-order traversal
   /// @param rt : Root of the binary tree
   /// @param vec : Traversal result
-  static void pre_order_traversal(BTNode const * const rt, std::vector<int> &vec);
+  template<class T>
+  static void pre_order_traversal(T const * const rt, std::vector<int> &vec) {
+    if (nullptr != rt) {
+      vec.push_back(rt->val);
+      pre_order_traversal(rt->left, vec);
+      pre_order_traversal(rt->right, vec);
+    }
+  }
 
   /// @brief Post-order traversal
   /// @param rt : Root of the binary tree
   /// @param vec : Traversal result
-  static void post_order_traversal(BTNode const * const rt, std::vector<int> &vec);
+  template<class T>
+  static void post_order_traversal(T const * const rt, std::vector<int> &vec) {
+    if (nullptr != rt) {
+      post_order_traversal(rt->left, vec);
+      post_order_traversal(rt->right, vec);
+      vec.push_back(rt->val);
+    }
+  }
 
   /// @brief Create complete binary tree from input vector
-  static void create_complete_binary_tree(BTNode * root, int idx, std::vector<int> &input, int null_val);
+  template<class T>
+  static void create_complete_binary_tree(T * root, int idx, std::vector<int> &input, int null_val) {
+    if (root) {
+      int len = input.size();
+      if (2 * idx + 1 >= len || null_val == input.at(2 * idx + 1)) {
+        root->left = nullptr;
+      } else {
+        root->left = new T(input.at(2 * idx + 1));
+        create_complete_binary_tree(root->left, 2 * idx + 1, input, null_val);
+      }
+      if (2 * idx + 2 >= len || null_val == input.at(2 * idx + 2)) {
+        root->right = nullptr;
+      } else {
+        root->right = new T(input.at(2 * idx + 2));
+        create_complete_binary_tree(root->right, 2 * idx + 2, input, null_val);
+      }
+    }
+  }
 
   /// @brief Create binary tree from pre-order traversal and in-order traversal vector
   /// @param pre_order :  pre-order vector

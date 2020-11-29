@@ -58,8 +58,16 @@
 
     森林的遍历： 先序 和 中序
 
+ 6.关于赫夫曼树
+   赫夫曼树 => https://blog.csdn.net/wuxudong12138/article/details/100032443
+   赫夫曼编码 => https://baijiahao.baidu.com/s?id=1651316704300729180&wfr=spider&for=pc
+   路径长度：两个结点间分支数
+       树的路径长度：根到每个结点路径长度之和
+   结点的带权路径长度：(根->该结点)路径长度 x 结点权值
+   树的带权路径长度(WPL)：所有叶子结点的带权路径长度之和
 
 线索二叉树
+   // 代码见 tree-graph/thread_binary_tree
    struct TBTNode {
      int val;               // ltag: 为0时，left指向左子；为1时，left指向前驱
      int ltag, rtag;        // rtag: 为0时，right指向右子；为1时，right指向后继

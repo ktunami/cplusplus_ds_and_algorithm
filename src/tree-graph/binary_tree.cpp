@@ -13,47 +13,6 @@
 #include "binary_tree.h"
 
 
-
-void BinaryTree::Traversal(BTNode const * const rt, std::vector<int> &vec, TraversalType type) {
-  vec.clear();
-  switch (type) {
-    case TraversalType::IN_ORDER :
-      in_order_traversal(rt, vec);
-      break;
-    case TraversalType::POST_ORDER :
-      post_order_traversal(rt, vec);
-      break;
-    case TraversalType::PRE_ORDER :
-      pre_order_traversal(rt, vec);
-      break;
-  }
-}
-
-void BinaryTree::in_order_traversal(BTNode const * const rt, std::vector<int> &vec) {
-  if (nullptr != rt) {
-    in_order_traversal(rt->left, vec);
-    vec.push_back(rt->val);
-    in_order_traversal(rt->right, vec);
-  }
-}
-
-
-void BinaryTree::pre_order_traversal(BTNode const * const rt, std::vector<int> &vec) {
-  if (nullptr != rt) {
-    vec.push_back(rt->val);
-    pre_order_traversal(rt->left, vec);
-    pre_order_traversal(rt->right, vec);
-  }
-}
-
-void BinaryTree::post_order_traversal(BTNode const * const rt, std::vector<int> &vec) {
-  if (nullptr != rt) {
-    post_order_traversal(rt->left, vec);
-    post_order_traversal(rt->right, vec);
-    vec.push_back(rt->val);
-  }
-}
-
 std::vector<std::vector<int> >  BinaryTree::levelOrder(BTNode* root) {
   std::vector<std::vector<int> > result;
   std::queue<std::pair<BTNode* ,int>> qu;
@@ -136,33 +95,6 @@ std::vector<std::vector<int> > BinaryTree::zigzagLevelOrder(BTNode* root) {
   return result;
 }
 
-void BinaryTree::create_complete_binary_tree(BTNode * root, int idx, std::vector<int> &input, int null_val) {
-  if (root) {
-    int len = input.size();
-    if (2 * idx + 1 >= len || null_val == input.at(2 * idx + 1)) {
-      root->left = nullptr;
-    } else {
-      root->left = new BTNode(input.at(2 * idx + 1));
-      create_complete_binary_tree(root->left, 2 * idx + 1, input, null_val);
-    }
-    if (2 * idx + 2 >= len || null_val == input.at(2 * idx + 2)) {
-      root->right = nullptr;
-    } else {
-      root->right = new BTNode(input.at(2 * idx + 2));
-      create_complete_binary_tree(root->right, 2 * idx + 2, input, null_val);
-    }
-  }
-}
-
-BTNode * BinaryTree::CreateFromArray(std::vector<int> &input, int default_null_val) {
-  BTNode * root{nullptr};
-  int len = input.size();
-  if (len > 0) {
-    root = new BTNode(input.at(0));
-    create_complete_binary_tree(root, 0, input, default_null_val);
-  }
-  return root;
-}
 
 BTNode * BinaryTree::creat_frm_preorder_inorder(
     std::vector<int> &pre_order, std::vector<int> &in_order, int from1, int to1,
