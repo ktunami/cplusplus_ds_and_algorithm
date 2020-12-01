@@ -1,0 +1,41 @@
+DFS =>
+   从某结点v出发，访问，标记。
+      选与v邻接的未被访问的w，访问，标记。
+          选与w邻接的未被访问的k，访问，标记
+   直到都被标记
+  【应用】（详见PPT）
+      1. Find minimum spanning tree
+      2. Cycle detection
+      3. Path between two nodes (i and j)
+         从i开始遍历，如果遇到j，说明有路径 （BFS应该也可以）
+      4. Topological sorting
+      5. Bipartite check
+      6. SCC
+      7. Maze problem
+
+BFS =>
+   从某结点v出发，访问，标记.
+       选与v邻接的全部顶点w1,w2,...,wn，访问，标记
+             分别选与w1,w2,...,wn邻接的全部顶点，访问，标记
+   直到都被标记
+   [注意] 对没有被访问的：先访问，再进队。千万不能出队再访问
+  【应用】
+       1) Shortest path in unweighted graph （leetcode 1091）
+            找到与v连通的各点到v最短路径
+            https://blog.csdn.net/huanhuan_Coder/article/details/79197181
+            https://blog.csdn.net/qq_44790483/article/details/102856417
+       2) Cycle detection
+            https://segmentfault.com/a/1190000005687907
+       3) Bipartite check
+       4) Path b/w 2 nodes
+       5) MST in undirected graph
+       6) Social n/w websites
+       7) GPS navigation
+       8) Network broadcasting
+       9) Connected Components
+      10) 求无向连通图中距离v点最远的一个顶点： v开始做BF，最后一个结点就是
+
+  BFS与DFS共同应用
+  1）判断一个无向图是否是一棵树
+      a. 一次遍历能访问所有结点
+      b. 遍历边数(遍历可访问所有边) en/2 = 顶点 -1

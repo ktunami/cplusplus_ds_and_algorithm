@@ -332,15 +332,6 @@ std::vector<bool> BinaryTree::judgeIt(BTNode* root) {
   return result;
 }
 
-void PrintVector(std::vector<int> const & vec) {
-  static int j = 1;
-  std::cout << "group : " << j << std::endl;
-  for (int i{0}; i < vec.size(); ++i) {
-    std::cout << vec.at(i) << "--";
-  }
-  std::cout << std::endl;
-  ++j;
-}
 
 bool BinaryTree::isSymmetric(BTNode* root) {
   std::function<bool(BTNode *, BTNode *)> check_left_right_symmetric;

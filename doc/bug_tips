@@ -40,4 +40,6 @@ BUG7 => HeapSort的bug
          2.(详见basic_sort_algo.cpp) 如果vec[father] = tmp; 这句写在while里面，那么当child超出范围时，
          这句就不会执行了。要特别注意边界的各种情况
 
+BUG8 => 注意边界部分反复check
 
+BUG9 => 注意该初始化的不要忘了初始化

@@ -95,7 +95,7 @@ void BasicSortAlgo::SelectionSort(std::vector<int> & input) {
 void BasicSortAlgo::InsertionSort(std::vector<int> & input) {
   for (int i{1}; i < input.size(); ++i) {
     auto val{input[i]}, j{i};
-    while (j >=0 && val < input[j-1]) {
+    while (j > 0 && val < input[j-1]) {  //Bug: not j >= 0
       input[j] = input[j-1];
       --j;
     }
@@ -109,7 +109,7 @@ void BasicSortAlgo::ShellSort(std::vector<int> & input) {
     for (int i{0}; i < incre; ++i) {
       for(int j{i + incre}; j < input.size(); j += incre) {
         auto val{input[j]}, k{j};
-        while(k >= 0 && input[k - incre] > val) {
+        while(k > 0 && input[k - incre] > val) {
           input[k] = input[k - incre];
           k -= incre;
         }
@@ -156,15 +156,6 @@ void BasicSortAlgo::MergeSort(std::vector<int> & input) {
   merge(input, 0, input.size()-1);
 }
 
-void PPrintVector(std::vector<int> const & vec) {
-  static int j = 1;
-  std::cout << "group : " << j << std::endl;
-  for (int i{0}; i < vec.size(); ++i) {
-    std::cout << vec.at(i) << "--";
-  }
-  std::cout << std::endl;
-  ++j;
-}
 
 void BasicSortAlgo::HeapSort(std::vector<int> & input) {
   std::function<void(std::vector<int> &, int, int)> adjust;
@@ -186,7 +177,6 @@ void BasicSortAlgo::HeapSort(std::vector<int> & input) {
   };
   for(int i=((input.size()>>1)-1); i>=0; --i) {
     adjust(input, i, input.size());
-    PPrintVector(input);
   }
   for(int j=input.size()-1; j > 0; --j) {
     int tmp = input[j];
