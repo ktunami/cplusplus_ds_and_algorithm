@@ -146,3 +146,34 @@ TEST(GraphAlgo, DijkstraGetPath) {
   gfag.DijkstraGetPath(input_paths,v0,vu,path);
   CheckIntVecEquality(path, expected_path);
 }
+
+TEST(GraphAlgo, GraphAlgo) {
+  std::vector<std::vector<float>> gf{
+    {0,5,FLT_MAX,7},
+    {FLT_MAX,0,4,2},
+    {3,3,0,2},
+    {FLT_MAX,FLT_MAX,1,0}
+  };
+  GraphAlgo gfag;
+  std::vector<std::vector<int>> expected_result{
+    {-1,-1,3,-1},
+    {3,-1,3,-1},
+    {-1,-1,-1,-1},
+    {2,2,-1,-1}
+  };
+  Check2DIntVecEquality(expected_result,gfag.Floyd(gf));
+}
+
+TEST(GraphAlgo, FloydGetPath) {
+  std::vector<std::vector<int>> input{
+    {-1,-1,3,-1},
+    {3,-1,3,-1},
+    {-1,-1,-1,-1},
+    {2,2,-1,-1}
+  };
+  std::vector<int> result;
+  std::vector<int> expected_result{1,3,2};
+  GraphAlgo gfag;
+  gfag.FloydGetPath(input,1,0,result);
+  CheckIntVecEquality(result,expected_result);
+}

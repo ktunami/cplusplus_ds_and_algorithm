@@ -232,3 +232,32 @@ void GraphAlgo::DijkstraGetPath(std::vector<int> const& path, int v0, int vu, st
     result.push_back(vu);
   }
 }
+
+std::vector<std::vector<int>> GraphAlgo::Floyd(std::vector<std::vector<float>> const& gf) {
+  std::vector<std::vector<float>> weight;
+  for (auto vec : gf) {
+    weight.push_back(vec);
+  }
+  std::vector<std::vector<int>> path(gf.size(),std::vector<int>(gf.size(), -1));
+  for (int k{0}; k < gf.size(); ++k) {
+    for (int i{0}; i < gf.size(); ++i) {
+      for (int j{0}; j < gf.size(); ++j) {
+        if(weight[i][j] > weight[i][k] + weight[k][j]) {
+           weight[i][j] = weight[i][k] + weight[k][j];
+           path[i][j] = k;
+        }
+      }
+    }
+  }
+  return path;
+}
+
+void GraphAlgo::FloydGetPath(std::vector<std::vector<int>> const& input, int v0, int vu, std::vector<int> &path) {
+  auto mid{input.at(v0).at(vu)};
+  if (mid == -1) {
+    path.push_back(v0);
+  } else {
+    FloydGetPath(input,v0,mid,path);
+    FloydGetPath(input,mid,vu,path);
+  }
+}

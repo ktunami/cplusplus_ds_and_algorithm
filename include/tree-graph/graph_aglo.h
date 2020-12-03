@@ -87,12 +87,24 @@ public:
   void Dijkstra(std::vector<std::vector<float>> const& gf, int v0,
       std::vector<int> &path, std::vector<float> &weight);
 
-  /// @brief Get path from v0 to vu in Dijkstra
+  /// @brief Get path from v0 to vu in Dijkstra result
   /// @param path : Input path
   /// @param v0 : From v0
   /// @param vu : To vu
   /// @param result : final path
   void DijkstraGetPath(std::vector<int> const& path, int v0, int vu, std::vector<int> &result);
+
+  /// @brief Floyd algorithm
+  /// @param gf : Input graph
+  /// @return  Shortest path
+  std::vector<std::vector<int>> Floyd(std::vector<std::vector<float>> const& gf);
+
+  /// @brief  Get path from v0 to vu in Floyd result
+  /// @param input : Input path
+  /// @param v0 : From v0
+  /// @param vu : To vu
+  /// @param path : Output path
+  void FloydGetPath(std::vector<std::vector<int>> const& input, int v0, int vu, std::vector<int> &path);
 };
 
 #endif//C_PRACTICE_GRAPH_AGLO_H
