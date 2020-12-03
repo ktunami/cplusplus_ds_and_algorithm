@@ -13,6 +13,12 @@
 #include <vector>
 #include <iostream>
 
+struct Edge {
+  int a;           // start
+  int b;           // end
+  float weight;
+};
+
 struct Arc {
   int val;        //Point to which vertex
   float weight;
@@ -63,6 +69,31 @@ public:
   /// @param v : Vertex
   /// @param vexes : Traversal result
   void BFS(Graph const& gf, int v, std::vector<int> &vexes);
+
+  /// @brief Prim algorithm (Minimum spanning tree)
+  /// @param gf : Input graph
+  /// @param edges : Output vertex of minimum spanning tree
+  void Prim(std::vector<std::vector<float>> const& gf,  std::vector<int> &vertex);
+
+  /// @brief Kruskal algorithm (Minimum spanning tree)
+  /// @param gf : Input graph
+  /// @param edges : Output edges of minimum spanning tree
+  void Kruskal(std::vector<std::vector<float>> const& gf, std::vector<Edge> &edges);
+
+  /// @brief Dijkstra algorithm
+  /// @param gf : Input graph
+  /// @param v0 : Start from v0
+  /// @param path : Last step in each shortest path to a certain vertex
+  /// @param weight : The weight of each path
+  void Dijkstra(std::vector<std::vector<float>> const& gf, int v0,
+      std::vector<int> &path, std::vector<float> &weight);
+
+  /// @brief Get path from v0 to vu in Dijkstra
+  /// @param path : Input path
+  /// @param v0 : From v0
+  /// @param vu : To vu
+  /// @param result : final path
+  void DijkstraGetPath(std::vector<int> const& path, int v0, int vu, std::vector<int> &result);
 };
 
 #endif//C_PRACTICE_GRAPH_AGLO_INT_H
