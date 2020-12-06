@@ -27,10 +27,10 @@ struct Arc {
 
 struct Vertex {
   int val;
-  float info;
+  int count;
   Arc * first;
   Arc * tail;
-  Vertex(int v) : val{v}, info{0.0f}, first{nullptr}, tail{nullptr} {}
+  Vertex(int v) : val{v}, count{0}, first{nullptr}, tail{nullptr} {}
 };
 
 struct Graph {
@@ -105,6 +105,11 @@ public:
   /// @param vu : To vu
   /// @param path : Output path
   void FloydGetPath(std::vector<std::vector<int>> const& input, int v0, int vu, std::vector<int> &path);
+
+  /// @brief Topological Sort
+  /// @param gf : Input graph
+  /// @return Sorted vertex
+  std::vector<int> TopologicalSort(Graph &gf);
 };
 
 #endif//C_PRACTICE_GRAPH_AGLO_H

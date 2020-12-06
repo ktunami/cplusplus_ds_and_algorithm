@@ -1,6 +1,6 @@
 /***************************************************
 * File:   test_graph_aglo.cpp
-* Brief:
+* Brief:  For gtest
 * Author: kate
 * Update: 2020/11/29.
 ***************************************************/
@@ -176,4 +176,21 @@ TEST(GraphAlgo, FloydGetPath) {
   GraphAlgo gfag;
   gfag.FloydGetPath(input,1,0,result);
   CheckIntVecEquality(result,expected_result);
+}
+
+TEST(GraphAlgo, TopologicalSort) {
+  GraphAlgo graph_algo;
+  std::vector<std::vector<float>> input {
+    {0,1,1,1,0,0,0},
+    {0,0,1,0,1,0,0},
+    {0,0,0,0,1,1,0},
+    {0,0,0,0,0,1,0},
+    {0,0,0,0,0,0,1},
+    {0,0,0,0,1,0,1},
+    {0,0,0,0,0,0,0}
+  };
+  auto gf{graph_algo.CreateAdjList(input, 0.0f)};
+  std::vector<int> expected_result{0,1,3,2,5,4,6};
+  auto result{graph_algo.TopologicalSort(gf)};
+  CheckIntVecEquality(result, expected_result);
 }

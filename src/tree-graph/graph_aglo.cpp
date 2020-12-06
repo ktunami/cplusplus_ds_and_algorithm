@@ -261,3 +261,38 @@ void GraphAlgo::FloydGetPath(std::vector<std::vector<int>> const& input, int v0,
     FloydGetPath(input,mid,vu,path);
   }
 }
+
+std::vector<int> GraphAlgo::TopologicalSort(Graph &gf) {
+  for (auto &vex : gf.vexes) {
+    auto arc{vex.first};
+    while(arc) {
+      ++gf.vexes[arc->val].count;
+      arc = arc->next;
+    }
+  }
+  std::queue<int> qu;
+  std::vector<int> result;
+  for(int i{0}; i < gf.n_num; ++i) {
+    if (0 == gf.vexes[i].count) {
+      qu.push(i);
+      result.push_back(i);
+    }
+  }
+  while(!qu.empty()) {
+    int qu_len = qu.size();
+    for (int i{0}; i < qu_len; ++i) {
+      auto cur{qu.front()};
+      qu.pop();
+      auto arc{gf.vexes[cur].first};
+      while(arc) {
+        --gf.vexes[arc->val].count;
+        if (0 == gf.vexes[arc->val].count) {
+          qu.push(arc->val);
+          result.push_back(arc->val);
+        }
+        arc = arc->next;
+      }
+    }
+  }
+  return result;
+}

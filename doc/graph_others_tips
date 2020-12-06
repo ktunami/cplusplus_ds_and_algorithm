@@ -1,0 +1,107 @@
+Dijkstra => 某顶点到其余各点的最短路径 (带权,且权重必须非负) 0(n^2)
+           S(已找到最短路径的顶点)                T(剩余顶点)
+ 初始：              v0                          其余各点
+                                          每次从这里选到v0最短的点vu，放入S中。
+                                          然后修改v0到T中各点距离的最小值
+   tips :
+   dist[vi] : v0到vi最短路径长度
+   path[vi] : v0到vi的上一跳
+              更新：也叫松弛操作
+                   if(dist[vi] > dist[vu] + edge(vu,vi).weight) {
+                       dist[vi] = dist[vu] + edge(vu,vi).weight
+                       path[vi] = vu
+                   }
+   flag[vi] : 1表示vi已并入S, 为0表示vi在T中
+
+
+Bellman Ford => 某顶点到其余各点的最短路径（可检测含权为负的边的环路）O(VE)
+   https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html
+   https://www.cnblogs.com/gaochundong/p/bellman_ford_algorithm.html
+   http://www.wutianqi.com/blog/1912.html
+   Bellman-Ford 算法描述：
+       1.创建源顶点 v 到图中所有顶点的距离的集合 distSet，为图中的所有顶点指定一个距离值，初始均为 Infinite，源顶点距离为 0；
+       2.计算最短路径，执行 V - 1 次遍历；
+            对于图中的每条边：如果起点 u 的距离 d 加上边的权值 w 小于终点 v 的距离 d，则更新终点 v 的距离值 d；
+       检测图中是否有负权边形成了环，遍历图中的所有边，计算 u 至 v 的距离，如果对于 v 存在更小的距离，则说明存在环
+
+
+Johnson 全源最短路径算法 => 解决负边权
+    https://www.cnblogs.com/gaochundong/p/johnson_algorithm.html
+    Johnson 算法描述如下：
+       1.给定图 G = (V, E)，增加一个新的顶点 s，使 s 指向图 G 中的所有顶点都建立连接，设新的图为 G’；
+       2.对图 G’ 中顶点 s 使用 Bellman-Ford 算法计算单源最短路径，得到结果 h[] = {h[0], h[1], .. h[V-1]}；
+       3.对原图 G 中的所有边进行 "re-weight"，即对于每个边 (u, v)，其新的权值为 w(u, v) + (h[u] - h[v])；
+       4.移除新增的顶点 s，对每个顶点运行 Dijkstra 算法求得最短路径；
+
+
+
+Floyd => 求图中任意一对顶点间最短路径 (带权)
+   矩阵A (已知当前两点间最短路径，初始为权重)               矩阵Path (中间顶点,初始为-1)
+      for(int k{0}; k < vex_num; ++k) {
+         if (A[i][j] > A[i][k] + A[k][j]) {
+            A[i][j] = A[i][k] + A[k][j];
+            Path[i][j] = k;
+         }
+      }
+   根据Path求路径：求a到b
+      Path[a][b] = c
+      那么答案变成了求a到c和c到b的路径，递归终止条件Path[a][b] = -1
+
+
+
+拓扑排序 => 对有向无环图G排序  O(n + e)
+   1）选没有前驱的点(入度为0)，输出
+   2）删除1)中的点和该点出发的所有边
+   重复1和2
+
+
+
+关键路径 => 从源点到汇点找出AOE中最长路径，也是整个工期的最短时间
+   https://blog.csdn.net/sj2050/article/details/80714453
+   AOE 带权的有向无环图
+       顶点：事件 (n个)
+       边：活动
+   事件发生的最早时间：ve[k] (从k发出的活动能开始的最早时间, k前面的活动必须都完成)
+       ve[k] = max{ve[j] + weight<j,k>}   j是k上游的顶点（ve[0] = 0）
+   事件发生的最迟时间：vl[k] (在不耽误工期的前提下，k最晚的发生时间)
+       vl[k] = min{vl[j] - weight<k,j>}   j是k下游的顶点（vl[n-1] = ve[n-1]）
+   活动发生的最早时间：
+       e[i] = ve[k]  (第i条边即：<k,j>)
+   活动发生的最迟时间：
+       l[i] = vl[j] - weight<k,j>  (第i条边即：<k,j>)
+   求法 =>
+       1）先进行拓扑排序
+       2）正序求e[i]，逆序求l[i]
+       3) 关键路径 {i|e[i] = l[i]}
+
+
+最大流问题 => 把源点比作工厂的话，问题就是求从工厂最大可以发出多少货物，是不至于超过道路的容量限制
+            边权：允许通过的最大货物数量
+   https://www.bilibili.com/video/BV1Zt4y197Y1
+  【概念】
+        1.可行流：
+            a) 满足容量限制条件f < c
+            b) 流量平衡：源的总流出 = 汇的总流入，其他顶点： 总流出 = 总流入
+        2.链: 从源到汇，由前向边和后向边构成
+            增广链：前向边<i,j>必有 fij < cij,  后向边必有 fij > 0
+        3.最小割：
+            割集：所有顶点分为两拨S和T，且源在S中，汇在T中
+                 割集为：(S,T) = {(vi,vj)属于E | vi属于S, vj属于T}
+            割集的意义：从源到汇的必经之路
+            最小割：容量和最小的（也就是瓶颈部分）
+
+         对于无权图而言：
+            大小为0的割：不存在路径的证明，即没有从S到T的边
+            大小为1的割：不存在两条不相交的路径（相交是指有公共边）【割数=不相交路径的上界】
+          （Ford-Fulkerson算法：找不相交路径）
+                 求出了最小割数 ： 最小割数 = 最大不相交路径数
+                 https://www.bilibili.com/video/BV1Q7411R7ie?from=search&seid=12032636418053297936
+  【算法】
+        寻找增广链：顶点标号，详见视频
+        对增广链调整：
+            设  dij = 前向边 ？cij - fij : fij
+                minD = Min{all dij}
+            修改增广链：
+                前向边： fij += minD    后向边：fij -= minD
+
+
