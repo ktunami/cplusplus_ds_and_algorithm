@@ -24,6 +24,13 @@ void Check2DIntVecEquality(std::vector<std::vector<int>> const& vec1, std::vecto
   }
 }
 
+void CheckStringVecEquality(std::vector<std::string> const& vec1, std::vector<std::string> const& vec2) {
+  ASSERT_EQ(vec1.size(), vec2.size());
+  for (int i{0}; i < vec1.size(); ++i) {
+    ASSERT_EQ(vec1.at(i), vec2.at(i));
+  }
+}
+
 void PrintIntVector(std::vector<int> const & vec) {
   static int j = 1;
   std::cout << "group : " << j << std::endl;

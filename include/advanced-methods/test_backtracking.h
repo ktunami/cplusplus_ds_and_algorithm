@@ -19,10 +19,15 @@ public:
   /// @return Ip addresses
   static std::vector<std::string> restoreIpAddresses(std::string s);
 
-  /// @brief Get all permutations of string S which contains repeat characters (letcode 08.07)
+  /// @brief Get all permutations of string S which contains repeat characters (letcode 08.08)
   /// @param S : Input string
   /// @return All permutations of S
-  static std::vector<std::string> PermutationWithRepeatedCharacter(std::string S);
+  static std::vector<std::string> PermutationWithRepeatedCharacters(std::string S);
+
+  /// @brief Get all permutations of string S which contains unique characters (letcode 08.08)
+  /// @param S : Input string
+  /// @return All permutations of S
+  static std::vector<std::string> PermutationWithUniqueCharacters(std::string S);
 
 private:
   /// @brief Find all forms of string s which can be converted to Ip address (Nowcoder 20)

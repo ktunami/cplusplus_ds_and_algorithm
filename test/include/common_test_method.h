@@ -17,6 +17,11 @@
 ///@param vec2 : vector 2
 void CheckIntVecEquality(std::vector<int> const& vec1, std::vector<int> const& vec2);
 
+///@brief Check if two string vectors are equal
+///@param vec1 : vector 1
+///@param vec2 : vector 2
+void CheckStringVecEquality(std::vector<std::string> const& vec1, std::vector<std::string> const& vec2);
+
 ///@brief Check if two 2D integral vectors are equal
 ///@param vec1 : vector 1
 ///@param vec2 : vector 2

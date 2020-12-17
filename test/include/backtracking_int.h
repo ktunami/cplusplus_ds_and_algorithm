@@ -32,7 +32,12 @@ public:
   /// @brief Get all permutations of string S which contains repeat characters
   /// @param S : Input string
   /// @return All permutations of S
-  static std::vector<std::string> PermutationWithRepeatedCharacter(std::string S);
+  static std::vector<std::string> PermutationWithRepeatedCharacters(std::string S);
+
+  /// @brief Get all permutations of string S which contains unique characters (letcode 08.08)
+  /// @param S : Input string
+  /// @return All permutations of S
+  static std::vector<std::string> PermutationWithUniqueCharacters(std::string S);
 };
 
 

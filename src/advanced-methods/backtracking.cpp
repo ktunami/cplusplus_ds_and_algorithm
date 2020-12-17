@@ -50,7 +50,7 @@ std::vector<std::string> Backtracking::restoreIpAddresses(std::string s) {
   return result;
 }
 
-std::vector<std::string> Backtracking::PermutationWithRepeatedCharacter(std::string S) {
+std::vector<std::string> Backtracking::PermutationWithRepeatedCharacters(std::string S) {
   std::vector<std::string> result;
   std::function<void(std::string, std::vector<bool>, std::string, int)> permu_int;
   permu_int = [&](std::string str, std::vector<bool> visited, std::string re, int index) {
@@ -73,6 +73,31 @@ std::vector<std::string> Backtracking::PermutationWithRepeatedCharacter(std::str
     }
   };
   std::sort(S.begin(), S.end());
+  std::vector<bool> flags(S.size(), false);
+  std::string res;
+  permu_int(S, flags, res, 0);
+  return result;
+}
+
+std::vector<std::string> Backtracking::PermutationWithUniqueCharacters(std::string S) {
+  std::vector<std::string> result;
+  std::function<void(std::string, std::vector<bool>, std::string, int)> permu_int;
+  permu_int = [&](std::string str, std::vector<bool> visited, std::string re, int index) {
+    if (index == str.length()) {
+      result.push_back(re);
+    } else {
+      for (int i{0}; i < str.length(); ++i) {
+        if (visited[i]){
+          continue;
+        }
+        visited[i] = true;
+        re += str[i];
+        permu_int(str, visited, re, index + 1);
+        visited[i] = false;
+        re.pop_back();
+      }
+    }
+  };
   std::vector<bool> flags(S.size(), false);
   std::string res;
   permu_int(S, flags, res, 0);
