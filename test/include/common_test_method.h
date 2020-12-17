@@ -24,7 +24,11 @@ void Check2DIntVecEquality(std::vector<std::vector<int>> const& vec1, std::vecto
 
 ///@brief Print integral vector
 ///@param vec : Input vector
-void PrintVector(std::vector<int> const& vec);
+void PrintIntVector(std::vector<int> const& vec);
+
+///@brief Print string vector
+///@param vec : Input vector
+void PrintStingVector(std::vector<std::string> const& vec);
 
 ///@brief Print 2D integral vector
 ///@param vec : Input vector

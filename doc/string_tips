@@ -1,0 +1,25 @@
+String Tips
+
+1. C++ string 中常用的API
+   => std::size_t 大小、位置用这个
+   => 转换成数字 stoi, stol, stoul, stoll, stoull, stof, stod, stold
+   => 转换成字符串 std::to_string()
+   => 可用各种Iterators和[]操作
+   => 提取子串 str.substr(start pos, length) //若无length，则一直取到最后
+   => 返回子串位置 str.find("substring");
+   => 其它 http://www.cplusplus.com/reference/string/string/
+        operator+=       Append to string (public member function )
+        append           Append to string (public member function )
+        push_back        Append character to string (public member function )
+        assign           Assign content to string (public member function )
+        insert           Insert into string (public member function )
+        erase            Erase characters from string (public member function )
+        replace          Replace portion of string (public member function )
+        swap             Swap string values (public member function )
+        pop_back         Delete last character (public member function )
+   => 关于assign : 用content(string)给str赋值
+        str.assign(content);
+        str.assign(content, pos, length);
+        str.assign(content, length);
+        str.assign(10,'*');                         // "**********"
+        str.assign(base.begin()+16,base.end()-12);

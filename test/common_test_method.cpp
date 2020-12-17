@@ -24,7 +24,7 @@ void Check2DIntVecEquality(std::vector<std::vector<int>> const& vec1, std::vecto
   }
 }
 
-void PrintVector(std::vector<int> const & vec) {
+void PrintIntVector(std::vector<int> const & vec) {
   static int j = 1;
   std::cout << "group : " << j << std::endl;
   for (int i{0}; i < vec.size(); ++i) {
@@ -34,10 +34,18 @@ void PrintVector(std::vector<int> const & vec) {
   ++j;
 }
 
+void PrintStingVector(std::vector<std::string> const& vec) {
+  std::cout << "Begin to print strings: " << std::endl;
+  for (int i{0}; i < vec.size(); ++i) {
+    std::cout << vec.at(i) << std::endl;
+  }
+}
+
+
 void Print2DVector(std::vector<std::vector<int>> const& vec) {
   std::cout << "Begin to print the 2D vector is: " << std::endl;
   for (int i{0}; i < vec.size(); ++i) {
-    PrintVector(vec.at(i));
+    PrintIntVector(vec.at(i));
   }
   std::cout << "2D vector print over " << std::endl;
 }
