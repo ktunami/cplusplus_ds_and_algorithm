@@ -24,10 +24,21 @@ void Check2DIntVecEquality(std::vector<std::vector<int>> const& vec1, std::vecto
   }
 }
 
-void CheckStringVecEquality(std::vector<std::string> const& vec1, std::vector<std::string> const& vec2) {
+void CheckStringVecEqualityStrict(std::vector<std::string> const& vec1, std::vector<std::string> const& vec2) {
   ASSERT_EQ(vec1.size(), vec2.size());
   for (int i{0}; i < vec1.size(); ++i) {
     ASSERT_EQ(vec1.at(i), vec2.at(i));
+  }
+}
+
+void CheckStringVecEqualityUnStrict(std::vector<std::string> const& vec1, std::vector<std::string> const& vec2) {
+  ASSERT_EQ(vec1.size(), vec2.size());
+  std::unordered_set<std::string> str_set;
+  for (auto const& str : vec1) {
+    str_set.insert(str);
+  }
+  for (auto const& str : vec1) {
+    ASSERT_FALSE(str_set.find(str) == str_set.end());
   }
 }
 
