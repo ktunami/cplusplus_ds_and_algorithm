@@ -5,9 +5,11 @@
 * Update: 2020/11/2.
 ***************************************************/
 
-#include "recursive_int.h"
 #include <gtest/gtest.h>
 #include <ctime>
+#include <cmath>
+
+#include "recursive_int.h"
 
 TEST(Recursive, ReverseStack){
   std::stack<int> st,st1,st2;
@@ -20,8 +22,7 @@ TEST(Recursive, ReverseStack){
     st.push(tmp);
     st1.push(tmp);
   }
-  Recursive rc;
-  rc.ReverseStack(st);
+  Recursive::ReverseStack(st);
   while(!st.empty()) {
     st2.push(st.top());
     st.pop();
@@ -33,4 +34,11 @@ TEST(Recursive, ReverseStack){
   }
   ASSERT_TRUE(st1.empty());
   ASSERT_TRUE(st2.empty());
+}
+
+TEST(Recursive, PowNum) {
+  ASSERT_EQ(Recursive::PowNum(3,5), (int)(std::pow(3,5)));
+  ASSERT_EQ(Recursive::PowNum(3,4), (int)(std::pow(3,4)));
+  ASSERT_EQ(Recursive::PowNum(3,0), (int)(std::pow(3,0)));
+  ASSERT_EQ(Recursive::PowNum(3,1), (int)(std::pow(3,1)));
 }

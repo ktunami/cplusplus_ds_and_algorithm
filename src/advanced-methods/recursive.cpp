@@ -26,3 +26,19 @@ int Recursive::get_bottom_num(std::stack<int> &st) {
     return lst;
   }
 }
+
+int Recursive::PowNum(int m, int n) {
+  if (n == 0) {
+    return 1;
+  } else if (n == 1) {
+    return m;
+  } else {
+    int k = n >> 1;
+    auto half{PowNum(m, k)};
+    if (n % 2 == 1) {
+      return half * half * m;
+    } else {
+      return half * half;
+    }
+  }
+}
