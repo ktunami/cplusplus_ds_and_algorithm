@@ -44,3 +44,9 @@ TEST(DProAlgo, lengthOfLIS) {
   ASSERT_EQ(3,DProAlgo::lengthOfLIS(input2));
 }
 
+TEST(DProAlgo, minimumTotal) {
+  std::vector<std::vector<int>> input{
+    {2},{3,4},{6,5,7},{4,1,8,3}
+  };
+  ASSERT_EQ(11, DProAlgo::minimumTotal(input));
+}

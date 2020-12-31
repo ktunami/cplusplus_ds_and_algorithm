@@ -27,6 +27,9 @@ public:
 
   /// @brief Longest Increasing Subsequence  (leetcode 300)
   static int lengthOfLIS(std::vector<int>& nums);
+
+  /// @brief Given a triangle array, return the minimum path sum from top to bottom.
+  static int minimumTotal(std::vector<std::vector<int>>& triangle);
 };
 
 #endif//C_PRACTICE_DYNAMIC_PROGRAMMING_INT_H

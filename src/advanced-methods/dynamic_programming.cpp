@@ -6,6 +6,7 @@
 ***************************************************/
 
 #include <vector>
+#include <iostream>
 
 #include "dynamic_programming.h"
 
@@ -84,6 +85,52 @@ int DProAlgo::lengthOfLIS(std::vector<int>& nums) {
       }
       end_len.push_back(cur_max);
       result = result > end_len.back() ? result : end_len.back();
+    }
+  }
+  return result;
+}
+
+
+void PrintIntVector(std::vector<int> const & vec) {
+  static int j = 1;
+  std::cout << "group : " << j << std::endl;
+  for (int i{0}; i < vec.size(); ++i) {
+    std::cout << vec.at(i) << "--";
+  }
+  std::cout << std::endl;
+  ++j;
+}
+
+void Print2DVector(std::vector<std::vector<int>> const& vec) {
+  std::cout << "Begin to print the 2D vector is: " << std::endl;
+  for (int i{0}; i < vec.size(); ++i) {
+    PrintIntVector(vec.at(i));
+  }
+  std::cout << "2D vector print over " << std::endl;
+}
+
+int DProAlgo::minimumTotal(std::vector<std::vector<int>>& triangle) {
+  int result = 0;
+  if (!triangle.empty()) {
+    std::vector<std::vector<int>> path_weights;
+    path_weights.emplace_back(std::vector<int>{triangle.at(0).at(0)});
+    result = triangle.at(0).at(0);
+    for (int i{1}; i < triangle.size(); ++i) {
+      path_weights.emplace_back(std::vector<int>(triangle.at(i).size(), 0));
+      int min_weight = INT_MAX;
+      for (int j{0}; j < triangle.at(i).size(); ++j) {
+        if (0 == j) {
+          path_weights[i][j] = path_weights[i-1][j] + triangle[i][j];
+        } else if (triangle.at(i).size() - 1 == j) {
+          path_weights[i][j] = path_weights[i-1][j-1] + triangle[i][j];
+        } else {
+          path_weights[i][j] = std::min(path_weights[i-1][j], path_weights[i-1][j-1]) + triangle[i][j];
+        }
+        if (triangle.size()-1 == i) {
+          min_weight = min_weight < path_weights[i][j] ? min_weight : path_weights[i][j];
+        }
+      }
+      result = min_weight;
     }
   }
   return result;
